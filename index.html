@@ -1,71 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Goa Climate Risk & Vulnerability Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Goa Climate Risk Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
   <style>
-    body, html { margin: 0; height: 100%; font-family: Arial, sans-serif; }
-    #app { display: flex; flex-direction: column; height: 100%; }
-    #map { flex: 1; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
     #sidebar {
-      position: absolute; top: 10px; left: 10px; width: 250px; 
-      background: rgba(255,255,255,0.95); padding: 10px;
-      border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.2);
-      max-height: 80%; overflow-y: auto;
+      width: 300px;
+      background: #f8f9fa;
+      border-right: 1px solid #ddd;
+      padding: 15px;
+      overflow-y: auto;
     }
-    #matrix {
-      background: #fff; border-top: 2px solid #ccc; padding: 10px;
-      font-size: 14px; overflow-x: auto;
+    #map {
+      flex: 1;
+      height: 100vh;
     }
-    table { border-collapse: collapse; width: 100%; margin-top: 5px; }
-    th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
-    th { background: #f0f0f0; }
-    h3 { margin: 8px 0; font-size: 16px; }
+    h2 {
+      margin-top: 0;
+    }
+    .risk-item {
+      margin-bottom: 12px;
+    }
   </style>
 </head>
 <body>
-  <div id="app">
-    <div id="map"></div>
-    <div id="sidebar">
-      <h3>Goa Climate Risks</h3>
-      <b>🌊 Coastal & Marine</b><br>
-      • Coastal erosion (Candolim, Colva, Betul)<br>
-      • Sea-level rise → 14% land risk by 2050<br>
-      • Cyclones → Increasing intensity<br><br>
-      <b>🌡️ Climate & Health</b><br>
-      • Heat stress (>35°C days in Quepem, Sanguem)<br>
-      • Malaria/Dengue linked to flooding<br><br>
-      <b>🌳 Forests & Biodiversity</b><br>
-      • Mining/roads fragment Western Ghats<br>
-      • Wetland & mangrove pressure<br><br>
-      <b>🌆 Urban & Infrastructure</b><br>
-      • Urban flooding (Panaji, Margao, Mapusa)<br>
-      • Tourism: erosion + water scarcity<br>
-    </div>
-    <div id="matrix">
-      <b>📊 District Risk Matrix (Dummy Data)</b>
-      <table>
-        <tr><th>District</th><th>Coastal</th><th>Heat</th><th>Flooding</th><th>Biodiversity</th></tr>
-        <tr><td>North Goa</td><td>High</td><td>Medium</td><td>High</td><td>Medium</td></tr>
-        <tr><td>South Goa</td><td>High</td><td>High</td><td>Medium</td><td>High</td></tr>
-      </table>
-    </div>
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <h2>Goa Climate Risks</h2>
+    <div class="risk-item"><b>Coastal Erosion:</b> High (Candolim, Colva)</div>
+    <div class="risk-item"><b>Cyclone Vulnerability:</b> Medium–High. Stronger cyclones (Fani, Tauktae) increasing.</div>
+    <div class="risk-item"><b>Sea-Level Rise:</b> 14% land area at risk by 2050</div>
+    <div class="risk-item"><b>Heat Stress:</b> More >35°C days, esp. Quepem, Sanguem</div>
+    <div class="risk-item"><b>Deforestation:</b> Western Ghats threatened by mining & roads</div>
+    <div class="risk-item"><b>Urban Flooding:</b> Rising incidents (last 5 yrs)</div>
   </div>
+
+  <!-- Map -->
+  <div id="map"></div>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    const map = L.map('map').setView([15.4, 73.8], 9);
+    // Initialize Map
+    var map = L.map('map').setView([15.3, 74.1], 9);
 
+    // Add Base Layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap'
     }).addTo(map);
 
-    // Dummy hotspot markers
-    L.marker([15.52, 73.76]).addTo(map).bindPopup("Candolim: Coastal Erosion Risk");
-    L.marker([15.29, 73.96]).addTo(map).bindPopup("Quepem: Heat Stress Rising");
-    L.marker([15.49, 73.82]).addTo(map).bindPopup("Panaji: Urban Flooding Hotspot");
+    // Goa Polygon (dummy rectangle - can replace with GeoJSON)
+    var goa = [
+      [15.7, 73.6],
+      [15.7, 74.3],
+      [14.9, 74.3],
+      [14.9, 73.6]
+    ];
+
+    var goaPolygon = L.polygon(goa, {color: "blue", weight: 2}).addTo(map);
+
+    goaPolygon.bindPopup("<b>Goa Climate Risk Profile</b><br>Click items on left panel for details.");
   </script>
 </body>
 </html>
