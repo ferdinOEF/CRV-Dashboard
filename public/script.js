@@ -8,25 +8,31 @@ document.addEventListener("DOMContentLoaded", function () {
   }).addTo(map);
 
   // Load JSON data
-  fetch("riskData.json")
-    .then(response => response.json())
-    .then(data => {
-      // Iterate over each taluka in JSON
-      for (const [taluka, info] of Object.entries(data)) {
-        if (!info.coordinates) {
-          console.warn(`⚠️ No coordinates for ${taluka}, skipping marker`);
-          continue;
-        }
-
-        const marker = L.marker(info.coordinates).addTo(map);
-
-        // On marker click, show details in sidebar
-        marker.on("click", () => {
-          showTalukaData(taluka, info);
-        });
+fetch("riskData.json")
+  .then(res => res.json())
+  .then(data => {
+    Object.entries(data).forEach(([taluka, details]) => {
+      if (!details.lat || !details.lng) {
+        console.warn(`⚠️ No coordinates for ${taluka}, skipping marker`);
+        return;
       }
-    })
-    .catch(err => console.error("Error loading riskData.json:", err));
+
+      const marker = L.marker([details.lat, details.lng]).addTo(map);
+
+      marker.on("click", () => {
+        let html = `<h3>${taluka}</h3><ul>`;
+        Object.entries(details).forEach(([key, value]) => {
+          if (key !== "lat" && key !== "lng") {
+            html += `<li><strong>${key}:</strong> ${value}</li>`;
+          }
+        });
+        html += "</ul>";
+
+        document.getElementById("info").innerHTML = html;
+      });
+    });
+  });
+
 
   // Function to update sidebar content
   function showTalukaData(talukaName, data) {
