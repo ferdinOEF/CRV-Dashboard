@@ -1,68 +1,62 @@
-[
-  {
-    "location": "Pernem",
-    "lat": 15.715,
-    "lng": 73.795,
-    "risks": [
-      "High coastal erosion in Morjim–Mandrem–Arambol belt",
-      "Tourism-driven groundwater stress",
-      "Cyclone & storm surge exposure"
-    ]
-  },
-  {
-    "location": "Bardez",
-    "lat": 15.6,
-    "lng": 73.77,
-    "risks": [
-      "High urbanization pressure (Mapusa, Calangute, Baga)",
-      "Solid waste management crisis in tourist hubs",
-      "Salinity intrusion in wells"
-    ]
-  },
-  {
-    "location": "Tiswadi",
-    "lat": 15.5,
-    "lng": 73.83,
-    "risks": [
-      "Urban flooding in Panaji",
-      "Heat island effect in urban clusters",
-      "Mangrove degradation in Chorao, Divar"
-    ]
-  },
-  {
-    "location": "Ponda",
-    "lat": 15.4,
-    "lng": 73.97,
-    "risks": [
-      "Water scarcity during summer",
-      "Pressure on Dudhsagar forest catchments",
-      "Impact on agriculture from erratic rainfall"
-    ]
-  },
-  {
-    "location": "Quepem",
-    "lat": 15.2,
-    "lng": 74.05,
-    "risks": [
-      "Mining-related land degradation",
-      "Deforestation pressure",
-      "Heat stress affecting agriculture"
-    ]
-  },
-  {
-    "location": "Mormugao",
-    "lat": 15.38,
-    "lng": 73.81,
-    "risks": [
-      "Coastal flooding (Vasco port zone)",
-      "Air pollution from shipping & coal handling",
-      "Industrial effluents impacting Zuari river"
-    ]
-  },
-  {
-    "location": "Salcete",
-    "lat": 15.27,
-    "lng": 73.95,
-    "risks": [
-      "Coastal erosion at Colva, Betalbatim",
-      "Sa
+let currentTheme = "All";
+
+// Fetch data
+fetch('riskData.json')
+  .then(response => response.json())
+  .then(data => {
+    const markers = [];
+
+    function renderMarkers(theme) {
+      // Clear old markers
+      markers.forEach(m => map.removeLayer(m));
+      markers.length = 0;
+
+      data.talukas.forEach(taluka => {
+        const marker = L.marker([taluka.lat, taluka.lng]).addTo(map);
+
+        let popupContent = `<h3>${taluka.name}</h3>`;
+
+        if (theme === "All") {
+          for (const [t, risks] of Object.entries(taluka.themes)) {
+            popupContent += `<strong>${t}</strong><ul>`;
+            risks.forEach(risk => popupContent += `<li>${risk}</li>`);
+            popupContent += `</ul>`;
+          }
+        } else if (taluka.themes[theme]) {
+          popupContent += `<strong>${theme}</strong><ul>`;
+          taluka.themes[theme].forEach(risk => popupContent += `<li>${risk}</li>`);
+          popupContent += `</ul>`;
+        } else {
+          popupContent += `<em>No data for ${theme}</em>`;
+        }
+
+        marker.bindPopup(popupContent);
+        markers.push(marker);
+      });
+    }
+
+    // Initial load
+    renderMarkers("All");
+
+    // Create theme filter dropdown
+    const select = L.control({position: 'topright'});
+    select.onAdd = function() {
+      const div = L.DomUtil.create('div', 'theme-filter');
+      div.innerHTML = `
+        <select id="themeSelect">
+          <option value="All">All Themes</option>
+          ${data.themes.map(t => `<option value="${t}">${t}</option>`).join('')}
+        </select>
+      `;
+      return div;
+    };
+    select.addTo(map);
+
+    // Handle dropdown change
+    document.addEventListener('change', e => {
+      if (e.target && e.target.id === "themeSelect") {
+        currentTheme = e.target.value;
+        renderMarkers(currentTheme);
+      }
+    });
+  });
