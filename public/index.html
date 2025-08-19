@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Goa Climate Risk Dashboard</title>
-
-  <!-- App styles (served from project root) -->
-  <link rel="stylesheet" href="/style.css" />
-
-  <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta charset="UTF-8">
+  <title>Goa Climate Risks</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <!-- Heatmap Plugin CSS -->
+  <style>
+    #map {
+      height: 600px;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  <div id="app">
-    <div id="map"></div>
+  <h1>Goa Climate Risks</h1>
+  <p>Click a taluka marker to view SAPCC-aligned vulnerabilities by theme.</p>
 
-    <aside id="panel">
-      <h1>Goa Climate Risks</h1>
-      <p class="muted">Click a taluka marker to view SAPCC-aligned vulnerabilities by theme.</p>
-
-      <div class="controls">
-        <label for="themeSelect">Theme filter</label>
-        <select id="themeSelect"><option value="All">All Themes</option></select>
-
-        <label class="heat-row">
-          <input type="checkbox" id="heatToggle" />
-          <span>Show heatmap</span>
-        </label>
-      </div>
-
-      <div id="status" class="muted"></div>
-      <div id="info-content"></div>
-    </aside>
+  <div class="controls">
+    <label for="themeFilter">Theme filter</label>
+    <select id="themeFilter">
+      <option value="All">All Themes</option>
+    </select>
+    <button id="heatmapToggle">Show Heatmap</button>
   </div>
 
-  <!-- Leaflet & heat plugin -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+  <div id="map"></div>
 
-  <!-- App script (served from project root) -->
-  <script src="/script.js"></script>
+  <div id="infoPanel">
+    <h2 id="talukaName">Select a taluka</h2>
+    <div id="themeData"></div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Heatmap Plugin -->
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+  <!-- App Script -->
+  <script src="script.js"></script>
 </body>
 </html>
