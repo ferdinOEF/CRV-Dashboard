@@ -1,0 +1,18 @@
+{
+  "North Goa": {
+    "Coastal Erosion Risk Index": "High (Candolim, Morjim, Anjuna)",
+    "Cyclone Vulnerability Score": "Medium–High (Fani, Tauktae impact)",
+    "Sea-Level Rise Impact Zone": "8% land at risk by 2050",
+    "Heat Stress": "Rising >35°C days in Sattari, Bicholim",
+    "Deforestation/Fragmentation": "Mining & road expansion in Western Ghats corridors",
+    "Urban Flooding": "Panaji, Mapusa — frequent waterlogging"
+  },
+  "South Goa": {
+    "Coastal Erosion Risk Index": "High (Colva, Benaulim, Palolem)",
+    "Cyclone Vulnerability Score": "Medium",
+    "Sea-Level Rise Impact Zone": "6% land at risk by 2050",
+    "Heat Stress": "Quepem, Sanguem — high exposure",
+    "Deforestation/Fragmentation": "Mining-impacted areas, forest diversion hotspots",
+    "Urban Flooding": "Margao, Vasco — increased flood events"
+  }
+}
