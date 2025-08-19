@@ -1,39 +1,33 @@
 // script.js
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize map
+  const map = L.map("map").setView([15.4, 74.0], 9);
 
-// Initialize the map
-const map = L.map("map").setView([15.2993, 74.1240], 9);
+  // Tile layer
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OpenStreetMap contributors"
+  }).addTo(map);
 
-// Add OpenStreetMap tiles
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: "&copy; OpenStreetMap contributors",
-}).addTo(map);
+  // Load risk data
+  fetch("/riskData.json")
+    .then((res) => {
+      if (!res.ok) throw new Error("Failed to load riskData.json");
+      return res.json();
+    })
+    .then((data) => {
+      console.log("Risk data loaded:", data); // Debug in console
 
-// Load risk data from /public/riskData.json
-fetch("riskData.json")
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error("Failed to load riskData.json");
-    }
-    return response.json();
-  })
-  .then((data) => {
-    data.forEach((district) => {
-      const marker = L.marker([district.lat, district.lng]).addTo(map);
-
-      // Popup with district risks
-      marker.bindPopup(`
-        <div>
-          <h3>${district.name}</h3>
+      data.forEach((district) => {
+        const marker = L.marker([district.lat, district.lng]).addTo(map);
+        marker.bindPopup(
+          `<b>${district.name}</b><br>
           <ul>
-            ${district.risks
-              .map((risk) => `<li><strong>${risk.type}:</strong> ${risk.level}</li>`)
-              .join("")}
-          </ul>
-        </div>
-      `);
+            ${district.risks.map(r => `<li>${r}</li>`).join("")}
+          </ul>`
+        );
+      });
+    })
+    .catch((err) => {
+      console.error("Error loading risk data:", err);
     });
-  })
-  .catch((error) => {
-    console.error("Error loading risk data:", error);
-  });
+});
