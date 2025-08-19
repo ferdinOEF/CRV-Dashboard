@@ -1,0 +1,38 @@
+{
+  "Panaji MRF – Market": {
+    "lat": 15.4909,
+    "lng": 73.8278,
+    "type": "Material Recovery Facility (MRF) & Composting",
+    "status": "Active; treats market organic waste; decentralized units operational"
+  },
+  "Panaji Waste Processing – Heera Petrol Pump": {
+    "lat": 15.4925,
+    "lng": 73.8285,
+    "type": "Waste Processing Facility",
+    "status": "Active; authorized for biomethanation"
+  },
+  "Saligao Dumpsite (hilltop)": {
+    "lat": 15.6072,
+    "lng": 73.8080,
+    "type": "Garbage Dump",
+    "status": "Legacy site; under community scrutiny and contested"
+  },
+  "Colvale C&D Waste Hub": {
+    "lat": 15.5600,
+    "lng": 73.8540,
+    "type": "Proposed C&D Recycling & Disposal Facility",
+    "status": "Identified by GWMC for C&D waste processing facility"
+  },
+  "Margao Litter Hotspot": {
+    "lat": 15.2735,
+    "lng": 73.9536,
+    "type": "Tourist-area litter hotspot",
+    "status": "Open litter issue near Colva beach and market zone"
+  },
+  "Mapusa Bulk Waste Zone": {
+    "lat": 15.5970,
+    "lng": 73.8140,
+    "type": "Bulk Waste Generator Cluster",
+    "status": "High concentration of shops, hotels generating mixed waste"
+  }
+}
