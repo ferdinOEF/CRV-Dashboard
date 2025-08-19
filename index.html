@@ -2,61 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Goa Climate Risk Dashboard</title>
+
   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
   <style>
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
-      display: flex;
+      width: 100%;
       font-family: Arial, sans-serif;
     }
-
-    #sidebar {
-      width: 300px;
-      background: #f8f9fa;
+    #container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+    }
+    #map {
+      flex: 3;
+      height: 100%;
+    }
+    #info-panel {
+      flex: 1;
       padding: 15px;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      background: #f5f5f5;
+      border-left: 2px solid #ddd;
       overflow-y: auto;
     }
-
-    #map {
-      flex: 1;
-      height: 100vh;
-    }
-
     h2 {
       margin-top: 0;
-      font-size: 18px;
-    }
-
-    .risk-entry {
-      margin-bottom: 8px;
-      padding: 5px;
-      border-bottom: 1px solid #ddd;
     }
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <div id="sidebar">
-    <h2>Risk Details</h2>
-    <div id="info-panel">Click a marker on the map to view risks.</div>
+  <div id="container">
+    <div id="map"></div>
+    <div id="info-panel">
+      <h2>Goa Climate Risks</h2>
+      <p>Click on a district marker to view risks.</p>
+    </div>
   </div>
-
-  <!-- Map -->
-  <div id="map"></div>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <script>
-    // Initialize map
-    var map = L.map('map').setView([15.4, 73.9], 9);
-
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+    // Inline risk data (instead of external JSON)
+    const riskData = {
+      "North Goa": {
+        "Coastal Erosion Risk Index": "High (Candolim, Morjim)",
+        "Cyclone Vulnerability Score": "Medium–High. Cyclones like Fani, Tauktae.",
+        "Sea-Level Rise Impact Zone": "Estimated 14% coastal area at risk by 2050",
+        "Heat Stress": "More >35°C days, esp. in Sattari and Bicholim",
+        "Deforestation/Fragmentation": "Mining + road projects threaten Western Ghats corridors",
+        "Urban Flooding": "Frequent flooding in Panjim, Mapusa"
+      },
+      "South Goa": {
+        "Coastal Erosion Risk Index": "High
