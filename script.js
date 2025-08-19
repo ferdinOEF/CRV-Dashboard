@@ -1,120 +1,109 @@
 let map;
-let riskData = {};
-let markers = [];
+let talukaMarkers = [];
 let heatLayer;
-let themeFilter = "All";
+let riskData = {};
 
-async function loadData() {
-  try {
-    const response = await fetch("/riskData.json"); // ✅ since it's in /public
-    riskData = await response.json();
-    initMap();
-    populateThemeFilter();
-  } catch (err) {
-    console.error("Error loading riskData.json:", err);
-  }
-}
+async function initMap() {
+  // Initialize map centered on Goa
+  map = L.map("map").setView([15.3, 74.0], 9);
 
-function initMap() {
-  map = L.map("map").setView([15.4, 73.8], 9);
-
-  // Base map
+  // Add base map
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OpenStreetMap contributors"
+    attribution: "© OpenStreetMap contributors"
   }).addTo(map);
 
-  // Plot taluka markers
-  Object.keys(riskData).forEach(district => {
-    Object.keys(riskData[district]).forEach(taluka => {
-      const tData = riskData[district][taluka];
-      const marker = L.marker(tData.coordinates)
-        .addTo(map)
-        .bindPopup(`<b>${taluka}</b><br>${district}`);
+  // Load risk data from public folder
+  try {
+    const response = await fetch("/riskData.json");
+    if (!response.ok) throw new Error("Could not load riskData.json");
+    riskData = await response.json();
+  } catch (err) {
+    console.error("Error loading riskData.json:", err);
+    return;
+  }
 
-      marker.on("click", () => showTalukaData(taluka, tData));
+  addTalukaMarkers();
+  populateThemeFilter();
+}
 
-      markers.push({
-        taluka,
-        district,
-        themes: tData.themes,
-        coords: tData.coordinates
-      });
+function addTalukaMarkers() {
+  talukaMarkers.forEach(m => map.removeLayer(m));
+  talukaMarkers = [];
+
+  Object.entries(riskData).forEach(([district, talukas]) => {
+    Object.entries(talukas).forEach(([taluka, themes]) => {
+      // Use dummy coordinates (replace with actual per taluka later)
+      let coords = getTalukaCoords(taluka);
+      if (!coords) return;
+
+      let marker = L.marker(coords).addTo(map);
+      marker.bindPopup(`<b>${taluka}</b><br>${formatThemes(themes)}`);
+      talukaMarkers.push(marker);
     });
   });
 }
 
+function formatThemes(themes) {
+  return Object.entries(themes)
+    .map(([theme, details]) => `<b>${theme}</b>: ${details.risk || ""}`)
+    .join("<br>");
+}
+
+function getTalukaCoords(taluka) {
+  const coords = {
+    "Bardez": [15.6, 73.8],
+    "Pernem": [15.75, 73.75],
+    "Bicholim": [15.6, 74.0],
+    "Sattari": [15.55, 74.1],
+    "Tiswadi": [15.5, 73.9],
+    "Ponda": [15.4, 74.0],
+    "Salcete": [15.25, 73.95],
+    "Mormugao": [15.4, 73.8],
+    "Canacona": [14.99, 74.05],
+    "Quepem": [15.2, 74.1],
+    "Sanguem": [15.2, 74.2],
+    "Dharbandora": [15.3, 74.2],
+  };
+  return coords[taluka] || null;
+}
+
 function populateThemeFilter() {
+  const themes = new Set();
+  Object.values(riskData).forEach(talukas => {
+    Object.values(talukas).forEach(themesObj => {
+      Object.keys(themesObj).forEach(theme => themes.add(theme));
+    });
+  });
+
   const select = document.getElementById("themeFilter");
-  let themes = new Set();
-
-  markers.forEach(m => {
-    Object.keys(m.themes).forEach(th => themes.add(th));
+  themes.forEach(theme => {
+    let option = document.createElement("option");
+    option.value = theme;
+    option.textContent = theme;
+    select.appendChild(option);
   });
 
-  themes.forEach(th => {
-    const opt = document.createElement("option");
-    opt.value = th;
-    opt.textContent = th;
-    select.appendChild(opt);
-  });
-
-  select.addEventListener("change", e => {
-    themeFilter = e.target.value;
-    updateHeatmap();
-  });
-
-  document.getElementById("heatmapToggle").addEventListener("click", () => {
-    if (heatLayer) {
-      map.removeLayer(heatLayer);
-      heatLayer = null;
-      document.getElementById("heatmapToggle").textContent = "Show Heatmap";
-    } else {
-      updateHeatmap();
-      document.getElementById("heatmapToggle").textContent = "Hide Heatmap";
-    }
-  });
+  select.addEventListener("change", filterByTheme);
 }
 
-function updateHeatmap() {
-  if (heatLayer) {
-    map.removeLayer(heatLayer);
-  }
+function filterByTheme() {
+  const selected = document.getElementById("themeFilter").value;
+  talukaMarkers.forEach(m => m.remove());
 
-  const heatPoints = [];
+  talukaMarkers = [];
+  Object.entries(riskData).forEach(([district, talukas]) => {
+    Object.entries(talukas).forEach(([taluka, themes]) => {
+      let coords = getTalukaCoords(taluka);
+      if (!coords) return;
 
-  markers.forEach(m => {
-    let intensity = 0;
-
-    if (themeFilter === "All") {
-      intensity = Object.values(m.themes).reduce((a, b) => a + b.score, 0);
-    } else if (m.themes[themeFilter]) {
-      intensity = m.themes[themeFilter].score;
-    }
-
-    heatPoints.push([m.coords[0], m.coords[1], intensity]);
-  });
-
-  heatLayer = L.heatLayer(heatPoints, { radius: 25 }).addTo(map);
-}
-
-function showTalukaData(taluka, data) {
-  document.getElementById("talukaName").textContent = taluka;
-  const container = document.getElementById("themeData");
-  container.innerHTML = "";
-
-  Object.entries(data.themes).forEach(([theme, info]) => {
-    if (themeFilter === "All" || theme === themeFilter) {
-      const section = document.createElement("div");
-      section.className = "theme-section";
-      section.innerHTML = `
-        <h3>${theme}</h3>
-        <p><b>Score:</b> ${info.score}</p>
-        <p>${info.details}</p>
-      `;
-      container.appendChild(section);
-    }
+      if (selected === "All" || Object.keys(themes).includes(selected)) {
+        let marker = L.marker(coords).addTo(map);
+        marker.bindPopup(`<b>${taluka}</b><br>${formatThemes(themes)}`);
+        talukaMarkers.push(marker);
+      }
+    });
   });
 }
 
 // Start
-loadData();
+initMap();
