@@ -1,32 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Goa Risk & Vulnerability Dashboard</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goa Climate Risk & Vulnerability Dashboard</title>
   
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Sidebar plugin CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-sidebar-v2/css/leaflet-sidebar.css" />
+
   <style>
-    #map { height: 100vh; }
-    .popup-box { font-size: 14px; line-height: 1.4; }
+    body, html { margin:0; padding:0; height:100%; }
+    #map { height:100%; width:100%; }
+    .leaflet-sidebar { background: #f8f9fa; }
+    .sidebar-header { font-weight: bold; font-size: 16px; margin-bottom: 10px; }
+    .risk-item { margin-bottom: 8px; padding: 6px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
   </style>
 </head>
 <body>
+  <!-- Sidebar -->
+  <div id="sidebar" class="leaflet-sidebar collapsed">
+    <div class="leaflet-sidebar-tabs">
+      <ul role="tablist">
+        <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+      </ul>
+    </div>
+    <div class="leaflet-sidebar-content">
+      <div class="leaflet-sidebar-pane" id="home">
+        <h1 class="sidebar-header">Goa Risk Indicators</h1>
+        <div class="risk-item">🌊 Coastal Erosion Risk Index: <b>High</b> (Candolim, Colva)</div>
+        <div class="risk-item">🌀 Cyclone Vulnerability Score: <b>Medium–High</b> (Fani, Tauktae)</div>
+        <div class="risk-item">🌍 Sea-Level Rise Impact Zone: <b>14% land area at risk by 2050</b></div>
+        <div class="risk-item">🔥 Heat Stress: Rising number of &gt;35°C days (Quepem, Sanguem)</div>
+        <div class="risk-item">🌲 Deforestation: Western Ghats mining & road projects</div>
+        <div class="risk-item">💧 Urban Flooding Incidents (last 5 yrs): <b>Rising trend</b></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map -->
   <div id="map"></div>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    // Initialize map
-    var map = L.map('map').setView([15.5, 74], 6); // Goa approx coords
+  <!-- Sidebar plugin JS -->
+  <script src="https://unpkg.com/leaflet-sidebar-v2/js/leaflet-sidebar.js"></script>
+  <!-- FontAwesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-    // Add basemap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  <script>
+    // Init map
+    var map = L.map('map').setView([15.5, 74], 8);
+
+    // Base layers
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // Draw Goa boundary (simplified dummy polygon)
+    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
+      'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri'
+    });
+
+    // Goa polygon (rough box, dummy for now)
     var goaBoundary = L.polygon([
       [15.0, 73.6],
       [15.0, 74.3],
@@ -35,18 +72,33 @@
     ], {color: "red"}).addTo(map);
 
     goaBoundary.bindPopup(`
-      <div class="popup-box">
-        <b>Goa - Risk Factors</b><br>
-  Coastal Erosion Risk Index: High (Candolim, Colva)<br>
-  Cyclone Vulnerability Score: Medium–High. Goa has seen stronger cyclones (Fani, Tauktae). Frequency and intensity are projected to rise.<br>
-  Sea-Level Rise Impact Zone: 14% land area at risk by 2050<br>
-  Heat Stress → Rising number of &gt;35°C days, especially inland (Quepem, Sanguem).<br>
-  Deforestation/Fragmentation → Western Ghats mining and road projects threaten connectivity corridors.<br>
-  Urban Flooding Incidents (last 5 yrs): Rising trend
-<br>
-       
-      </div>
+      <b>Goa - Risk Factors</b><br>
+      Coastal Erosion: High (Candolim, Colva)<br>
+      Cyclone Vulnerability: Medium–High<br>
+      Sea-Level Rise: 14% land area at risk by 2050<br>
+      Heat Stress: More &gt;35°C days<br>
+      Deforestation: Western Ghats corridor at risk<br>
+      Urban Flooding: Rising trend
     `);
+
+    // Layer control
+    var baseMaps = {
+      "OpenStreetMap": osm,
+      "Satellite": satellite
+    };
+
+    L.control.layers(baseMaps, null, { collapsed: true }).addTo(map);
+
+    // Sidebar
+    var sidebar = L.control.sidebar({
+      autopan: true,
+      closeButton: true,
+      container: 'sidebar',
+      position: 'left'
+    }).addTo(map);
+
+    // Open sidebar by default
+    sidebar.open('home');
   </script>
 </body>
 </html>
