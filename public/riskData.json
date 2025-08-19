@@ -1,112 +1,105 @@
 {
   "North Goa": {
     "Bardez": {
-      "Water": {
-        "Vulnerability": "Groundwater depletion and saline intrusion",
-        "Risks": ["Over-extraction for tourism", "Reduced rainfall recharge"]
-      },
-      "Agriculture": {
-        "Vulnerability": "Decline in crop yields",
-        "Risks": ["Heat stress on paddy", "Pest outbreaks"]
-      },
-      "Forests": {
-        "Vulnerability": "Loss of biodiversity",
-        "Risks": ["Forest fires", "Encroachment"]
-      },
-      "Health": {
-        "Vulnerability": "Heat-related illness rise",
-        "Risks": ["Vector-borne diseases (dengue/malaria)"]
-      },
-      "Coastal": {
-        "Vulnerability": "Shoreline erosion",
-        "Risks": ["Loss of beaches", "Saltwater intrusion"]
-      }
+      "Water Resources": ["Groundwater depletion from tourism demand", "Salinity intrusion into wells"],
+      "Agriculture": ["Decline in paddy yields due to erratic rainfall", "Saltwater stress in khazan lands"],
+      "Forests & Biodiversity": ["Mangrove degradation from development", "Habitat fragmentation in estuarine zones"],
+      "Health": ["Increase in vector-borne diseases post-monsoon"],
+      "Coastal & Fisheries": ["Erosion at Calangute and Baga beaches", "Shrinking fish catch due to sea temperature rise"],
+      "Energy": ["Rising electricity demand in tourist hubs"],
+      "Infrastructure & Settlements": ["Urban flooding in Mapusa during heavy rains"]
+    },
+    "Tiswadi": {
+      "Water Resources": ["Pollution in Mandovi affecting drinking supply", "Monsoon runoff overloads drains"],
+      "Agriculture": ["Risk to khazan agriculture from sea-level rise"],
+      "Forests & Biodiversity": ["Mangrove loss near Chorao and Ribandar"],
+      "Health": ["Urban heat island in Panaji increasing heat stress"],
+      "Coastal & Fisheries": ["Erosion at Dona Paula shoreline"],
+      "Energy": ["Growing demand on grid from urbanization"],
+      "Infrastructure & Settlements": ["Flood-prone low-lying wards"]
     },
     "Pernem": {
-      "Water": {
-        "Vulnerability": "Erratic rainfall",
-        "Risks": ["Flash floods", "Seasonal water scarcity"]
-      },
-      "Agriculture": {
-        "Vulnerability": "Cashew & coconut productivity decline",
-        "Risks": ["Unseasonal rains damaging flowers"]
-      },
-      "Fisheries": {
-        "Vulnerability": "Marine productivity loss",
-        "Risks": ["Temperature stress on fish stocks"]
-      }
+      "Water Resources": ["Seasonal water scarcity in coastal villages"],
+      "Agriculture": ["Cashew & coconut flowering damaged by unseasonal rains"],
+      "Forests & Biodiversity": ["Loss of dune vegetation and turtle nesting sites"],
+      "Health": ["Heat exposure risk among migrant laborers"],
+      "Coastal & Fisheries": ["Morjim–Mandrem dunes eroding"],
+      "Energy": ["Lack of resilient power during heatwaves"],
+      "Infrastructure & Settlements": ["Poor road drainage leading to flooding"]
     },
     "Bicholim": {
-      "Forests": {
-        "Vulnerability": "Mining impact",
-        "Risks": ["Deforestation from illegal mining"]
-      },
-      "Water": {
-        "Vulnerability": "River pollution",
-        "Risks": ["Acid mine drainage in Mandovi basin"]
-      }
+      "Water Resources": ["River pollution from mining runoff"],
+      "Agriculture": ["Soil degradation reducing crop yields"],
+      "Forests & Biodiversity": ["Deforestation from mining corridors"],
+      "Health": ["Respiratory ailments from mining dust"],
+      "Coastal & Fisheries": [],
+      "Energy": [],
+      "Infrastructure & Settlements": ["Flash floods from degraded catchments"]
+    },
+    "Sattari": {
+      "Water Resources": ["Flash floods in monsoon, dry season scarcity"],
+      "Agriculture": ["Spice crop losses due to erratic rainfall"],
+      "Forests & Biodiversity": ["Biodiversity threatened from deforestation"],
+      "Health": ["Vector-borne disease outbreaks post-flood"],
+      "Coastal & Fisheries": [],
+      "Energy": [],
+      "Infrastructure & Settlements": ["Landslide risks in hilly zones"]
     }
   },
   "South Goa": {
     "Salcete": {
-      "Water": {
-        "Vulnerability": "Declining aquifers",
-        "Risks": ["Over-extraction from hotels", "Saltwater ingress"]
-      },
-      "Health": {
-        "Vulnerability": "Disease outbreaks",
-        "Risks": ["Leptospirosis after floods"]
-      }
+      "Water Resources": ["Saltwater intrusion into aquifers"],
+      "Agriculture": ["Loss of khazan farming productivity"],
+      "Forests & Biodiversity": ["Wetland conversion to real estate"],
+      "Health": ["Water-borne diseases post-flooding"],
+      "Coastal & Fisheries": ["Beach erosion at Colva and Benaulim"],
+      "Energy": [],
+      "Infrastructure & Settlements": ["Poor sewage flooding in Margao"]
     },
     "Mormugao": {
-      "Coastal": {
-        "Vulnerability": "Sea-level rise impact",
-        "Risks": ["Port infrastructure damage", "Flooding of low-lying wards"]
-      },
-      "Air Quality": {
-        "Vulnerability": "Coal dust pollution",
-        "Risks": ["Respiratory diseases"]
-      }
+      "Water Resources": ["Coastal aquifer salinization"],
+      "Agriculture": [],
+      "Forests & Biodiversity": ["Mangrove degradation near Zuari mouth"],
+      "Health": ["Respiratory issues from coal dust at port"],
+      "Coastal & Fisheries": ["Ship-based pollution affecting marine life"],
+      "Energy": ["Power outages during storm events"],
+      "Infrastructure & Settlements": ["Storm surge threat to port infrastructure"]
     },
     "Canacona": {
-      "Forests": {
-        "Vulnerability": "Cyclone damage to mangroves",
-        "Risks": ["Loss of coastal protection"]
-      },
-      "Tourism": {
-        "Vulnerability": "Beach erosion",
-        "Risks": ["Impact on shacks & livelihoods"]
-      }
+      "Water Resources": ["Flash floods in monsoon"],
+      "Agriculture": ["Arecanut & rice crop losses from drought"],
+      "Forests & Biodiversity": ["Mangrove loss affecting turtle nesting"],
+      "Health": ["Post-monsoon malaria incidence"],
+      "Coastal & Fisheries": ["Erosion at Palolem, Agonda beaches"],
+      "Energy": [],
+      "Infrastructure & Settlements": ["Road damage in hilly areas"]
     },
     "Quepem": {
-      "Agriculture": {
-        "Vulnerability": "Rain-fed paddy at risk",
-        "Risks": ["Monsoon variability"]
-      },
-      "Mining": {
-        "Vulnerability": "Soil & water contamination",
-        "Risks": ["Flooding from abandoned pits"]
-      }
+      "Water Resources": ["Pollution in Sal & Kushawati rivers"],
+      "Agriculture": ["Decline in rain-fed farming returns"],
+      "Forests & Biodiversity": ["Deforestation from mining"],
+      "Health": ["Respiratory illnesses near mining zones"],
+      "Coastal & Fisheries": [],
+      "Energy": [],
+      "Infrastructure & Settlements": []
     },
     "Sanguem": {
-      "Forests": {
-        "Vulnerability": "Western Ghats biodiversity loss",
-        "Risks": ["Habitat fragmentation"]
-      },
-      "Water": {
-        "Vulnerability": "Hydropower stress",
-        "Risks": ["Variable rainfall reducing generation"]
-      }
+      "Water Resources": ["Hydropower stress in variable flows"],
+      "Agriculture": ["Cashew yield decline under heat stress"],
+      "Forests & Biodiversity": ["Disruption of wildlife corridors"],
+      "Health": ["Heat-related illnesses in mining areas"],
+      "Coastal & Fisheries": [],
+      "Energy": [],
+      "Infrastructure & Settlements": []
     },
     "Dharbandora": {
-      "Agriculture": {
-        "Vulnerability": "Sugarcane productivity decline",
-        "Risks": ["Water scarcity in dry months"]
-      },
-      "Health": {
-        "Vulnerability": "Vector-borne diseases",
-        "Risks": ["Increased mosquito breeding"]
-      }
+      "Water Resources": ["Streams drying during summer"],
+      "Agriculture": ["Sugarcane decline from water scarcity"],
+      "Forests & Biodiversity": ["Mollem forest fragmentation"],
+      "Health": ["Heat stress affecting forest-dependent communities"],
+      "Coastal & Fisheries": [],
+      "Energy": [],
+      "Infrastructure & Settlements": []
     }
   }
 }
