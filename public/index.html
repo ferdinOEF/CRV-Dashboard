@@ -1,37 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Goa Climate Risks</title>
+
   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <link rel="stylesheet" href="./style.css">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+      margin: 10px 0;
+    }
+    p {
+      text-align: center;
+      margin: 5px 0;
+    }
+    #controls {
+      text-align: center;
+      margin: 10px;
+    }
+    #map {
+      height: 70vh;
+      width: 100%;
+    }
+    #talukaData {
+      padding: 15px;
+      background: #f9f9f9;
+      border-top: 1px solid #ccc;
+      min-height: 120px;
+    }
+  </style>
 </head>
 <body>
   <h1>Goa Climate Risks</h1>
   <p>Click a taluka marker to view SAPCC-aligned vulnerabilities by theme.</p>
 
-  <div class="controls">
-    <label for="themeFilter">Theme filter</label>
+  <div id="controls">
+    <label for="themeFilter">Theme filter </label>
     <select id="themeFilter">
       <option value="All">All Themes</option>
     </select>
-    <label><input type="checkbox" id="heatmapToggle"> Show heatmap</label>
+    <button id="toggleHeatmap">Show heatmap</button>
   </div>
-
-  <!-- ✅ ADD THIS -->
-<div id="talukaData" class="taluka-data">
-  <p><em>Select a taluka to see detailed vulnerabilities.</em></p>
-</div>
 
   <div id="map"></div>
 
+  <div id="talukaData">
+    <p><em>Select a taluka to see detailed vulnerabilities.</em></p>
+  </div>
+
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <!-- Heatmap plugin -->
-  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
-  <!-- Our script -->
-  <script src="./script.js"></script>
+  <!-- Our Script -->
+  <script src="script.js"></script>
 </body>
 </html>
