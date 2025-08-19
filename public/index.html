@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Goa Climate Risks</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
 <body>
   <h1>Goa Climate Risks</h1>
   <p>Click on a taluka marker to view vulnerabilities by theme</p>
+
   <div id="map"></div>
-  <div id="info-panel">
-    <h2 id="taluka-name">Select a taluka</h2>
-    <div id="risk-details"></div>
+
+  <div id="sidebar">
+    <h2 id="taluka-title">Select a taluka</h2>
+    <div id="themes"></div>
   </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Our Script -->
   <script src="script.js"></script>
 </body>
 </html>
