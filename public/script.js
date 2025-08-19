@@ -1,50 +1,81 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize the map
-  const map = L.map("map").setView([15.5, 74], 9);
+  // Initialize map
+  const map = L.map("map").setView([15.4, 74], 9);
 
-  // Add base layer
+  // Base layer
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors"
   }).addTo(map);
 
-  // Load JSON data
-fetch("riskData.json")
-  .then(res => res.json())
-  .then(data => {
-    Object.entries(data).forEach(([taluka, details]) => {
-      if (!details.lat || !details.lng) {
-        console.warn(`⚠️ No coordinates for ${taluka}, skipping marker`);
-        return;
-      }
+  let heatLayer;
+  let climateData;
 
-      const marker = L.marker([details.lat, details.lng]).addTo(map);
-
-      marker.on("click", () => {
-        let html = `<h3>${taluka}</h3><ul>`;
-        Object.entries(details).forEach(([key, value]) => {
-          if (key !== "lat" && key !== "lng") {
-            html += `<li><strong>${key}:</strong> ${value}</li>`;
-          }
-        });
-        html += "</ul>";
-
-        document.getElementById("info").innerHTML = html;
-      });
-    });
-  });
-
-
-  // Function to update sidebar content
+  // Function to update sidebar
   function showTalukaData(talukaName, data) {
     const container = document.getElementById("talukaData");
-    if (!container) {
-      console.error("No #talukaData element found!");
-      return;
-    }
     container.innerHTML = `
       <h3>${talukaName}</h3>
-      <p><strong>Theme:</strong> ${data.theme}</p>
-      <p><strong>Vulnerabilities:</strong> ${data.vulnerabilities}</p>
+      <ul>
+        ${Object.entries(data)
+          .filter(([k]) => k !== "lat" && k !== "lng" && k !== "riskScore")
+          .map(([k, v]) => `<li><strong>${k}:</strong> ${v}</li>`)
+          .join("")}
+      </ul>
     `;
   }
+
+  // Load JSON data
+  fetch("riskData.json")
+    .then(res => res.json())
+    .then(data => {
+      climateData = data;
+
+      // Populate theme dropdown dynamically
+      const first = Object.values(data)[0];
+      const themes = Object.keys(first).filter(k => !["lat", "lng", "riskScore"].includes(k));
+      const themeSelect = document.getElementById("themeFilter");
+      themes.forEach(theme => {
+        const opt = document.createElement("option");
+        opt.value = theme;
+        opt.textContent = theme;
+        themeSelect.appendChild(opt);
+      });
+
+      // Create markers
+      Object.entries(data).forEach(([taluka, details]) => {
+        if (!details.lat || !details.lng) return;
+        const marker = L.marker([details.lat, details.lng]).addTo(map);
+        marker.on("click", () => {
+          const selectedTheme = document.getElementById("themeFilter").value;
+          let filtered = {};
+          if (selectedTheme === "All") {
+            filtered = details;
+          } else {
+            filtered = {
+              [selectedTheme]: details[selectedTheme],
+              lat: details.lat,
+              lng: details.lng
+            };
+          }
+          showTalukaData(taluka, filtered);
+        });
+      });
+    })
+    .catch(err => {
+      console.error("Error loading data:", err);
+    });
+
+  // Heatmap toggle
+  document.getElementById("toggleHeatmap").addEventListener("click", () => {
+    if (!climateData) return;
+    if (heatLayer) {
+      map.removeLayer(heatLayer);
+      heatLayer = null;
+      return;
+    }
+    const points = Object.values(climateData)
+      .filter(d => d.lat && d.lng)
+      .map(d => [d.lat, d.lng, d.riskScore || 0.5]);
+    heatLayer = L.heatLayer(points, { radius: 25 }).addTo(map);
+  });
 });
