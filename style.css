@@ -1,28 +1,23 @@
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 h1 {
-  text-align: center;
   margin: 10px 0;
-}
-
-p {
-  text-align: center;
 }
 
 .controls {
-  text-align: center;
-  margin: 10px 0;
+  margin: 10px;
 }
 
 #map {
-  height: 600px;
+  height: 80vh;   /* ✅ critical: must define height */
   width: 100%;
-  margin-bottom: 10px;
+  margin: auto;
 }
+
 
 #infoPanel {
   padding: 15px;
