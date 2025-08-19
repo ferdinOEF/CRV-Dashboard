@@ -7,37 +7,13 @@
           "level": "High",
           "description": "Low-lying coastal exposure; beach/shoreline sensitivity and storm-surge/SLR risk.",
           "evidence": "Coastal talukas face SLR and extreme rainfall-driven flooding; ~15% land <15m elevation highly vulnerable.",
-          "source_tag": "SAPCC Flood/Coast; TOI summary"
+          "source_tag": "SAPCC Flood/Coast"
         },
         "Water": {
           "level": "Statewide concern",
-          "description": "Water security stressed by higher ET losses and heavier downpours causing variable recharge.",
-          "evidence": "Projected temp rise increases evapotranspiration; rainfall variability increases.",
+          "description": "Water security stressed by higher evapotranspiration and uneven rainfall recharge.",
+          "evidence": "Projected temperature rise increases evapotranspiration; rainfall variability increases.",
           "source_tag": "SAPCC Water"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Rainfall variability and extreme events impact kharif windows; saline ingress risk in coastal belts.",
-          "evidence": "Decrease/stability in mean rainfall with higher extremes; coastal saline intrusion risk noted.",
-          "source_tag": "SAPCC Agriculture/Coast"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Heat stress days expected to increase; very heavy rainfall events to rise.",
-          "evidence": "40°C days by ~2040 become more common; very heavy/extreme rainfall increases.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Urban_Flooding": {
-          "level": "Medium",
-          "description": "Flash flooding risk in low-lying settlements during very heavy rain spells.",
-          "evidence": "Rising very heavy rainfall frequency; low elevation coastal pockets.",
-          "source_tag": "SAPCC Extremes/Flood"
-        },
-        "Forests_Biodiversity": {
-          "level": "Statewide concern",
-          "description": "Habitat/wetland management needed to buffer heat and floods; ecosystem-based adaptation.",
-          "evidence": "SAPCC calls for urban wetland roles & habitat measures for CC mitigation/adaptation.",
-          "source_tag": "SAPCC Habitat/Wetlands"
         }
       }
     },
@@ -52,33 +28,15 @@
         },
         "Urban_Flooding": {
           "level": "High",
-          "description": "Identified as the most vulnerable to flood-related hazards in state analyses.",
+          "description": "Flood-prone wards & urban drainage stress; high vulnerability in trend analyses.",
           "evidence": "SAPCC flood vulnerability map: Bardez most vulnerable to flooding-related hazards.",
           "source_tag": "SAPCC Flood"
         },
         "Water": {
           "level": "Statewide concern",
-          "description": "Heavier extremes with interspersed dry spells complicate water security.",
-          "evidence": "Warmer climate ↑ ET; extreme rainfall ↑; water security likely to deteriorate.",
+          "description": "Tourism-driven water extraction increases groundwater stress and saline intrusion risk.",
+          "evidence": "Water security and saline intrusion issues documented for coastal talukas.",
           "source_tag": "SAPCC Water"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Rainfall variability affects paddy & horticulture; flood-damage risk in lowlands.",
-          "evidence": "Increase in very heavy rainfall; flood-prone lowlands.",
-          "source_tag": "SAPCC Agriculture/Flood"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Heat stress and extreme rain-related health risks increasing.",
-          "evidence": "↑ max temps; ↑ extreme rainfall frequencies.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Forests_Biodiversity": {
-          "level": "Statewide concern",
-          "description": "Green/blue infrastructure and wetland buffers recommended.",
-          "evidence": "SAPCC ecosystem-based adaptation & urban wetland roles.",
-          "source_tag": "SAPCC Habitat/Wetlands"
         }
       }
     },
@@ -87,39 +45,15 @@
       "risks": {
         "Coastal": {
           "level": "High",
-          "description": "Estuarine/coastal low-lying areas exposed to surge and extreme rainfall flooding.",
-          "evidence": "Coastal taluka; low elevation pockets.",
-          "source_tag": "SAPCC Coast/Flood"
+          "description": "Estuarine and low-lying zones exposed to surge and tidal flooding.",
+          "evidence": "Estuarine low zones and Mandovi estuary exposure.",
+          "source_tag": "SAPCC Coast"
         },
         "Urban_Flooding": {
           "level": "Medium",
-          "description": "Intense short-duration rain spells trigger urban drainage stress.",
-          "evidence": "Very heavy & exceptional rainfall events increase.",
+          "description": "Short-duration intense rainfall causes urban drainage overload.",
+          "evidence": "Increase in very heavy rainfall events reported in SAPCC.",
           "source_tag": "SAPCC Extremes"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Water security pressure under warming and rainfall variability.",
-          "evidence": "↑ ET with warming; rainfall projections variable.",
-          "source_tag": "SAPCC Water"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Paddy/vegetable belts sensitive to waterlogging and saline ingress.",
-          "evidence": "Flood and coastal notes.",
-          "source_tag": "SAPCC Agriculture/Coast"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Heat and extreme-rain event health risks.",
-          "evidence": "↑ 40°C days; ↑ extreme rain.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Forests_Biodiversity": {
-          "level": "Statewide concern",
-          "description": "Wetland/urban lake roles in heat mitigation and carbon sinks.",
-          "evidence": "SAPCC calls out urban wetlands functions.",
-          "source_tag": "SAPCC Habitat/Wetlands"
         }
       }
     },
@@ -128,39 +62,15 @@
       "risks": {
         "Water": {
           "level": "Statewide concern",
-          "description": "Rainfall variability and ET losses challenge storage; mining-impacted catchments need restoration (per SAPCC habitat actions).",
-          "evidence": "Water security deterioration likely under warming & extremes; habitat restoration measures proposed.",
-          "source_tag": "SAPCC Water/Habitat"
-        },
-        "Urban_Flooding": {
-          "level": "Medium",
-          "description": "Extreme rainfall events increase pluvial flood potential.",
-          "evidence": "Rising very heavy/excep. rainfall events.",
-          "source_tag": "SAPCC Extremes"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Variability in monsoon affects cropping windows; localized flood damage possible.",
-          "evidence": "Rainfall projections + extremes.",
-          "source_tag": "SAPCC Agriculture"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Heat stress days increase inland as temps rise.",
-          "evidence": "Projected max temps & 40°C days.",
-          "source_tag": "SAPCC Extremes/Health"
+          "description": "Catchment degradation and mining runoff stress river quality.",
+          "evidence": "SAPCC notes catchment restoration for impacted mining areas.",
+          "source_tag": "SAPCC Water"
         },
         "Forests_Biodiversity": {
           "level": "Statewide concern",
-          "description": "Catchment/green cover and wetland functions emphasized.",
-          "evidence": "Ecosystem-based adaptation & wetlands.",
+          "description": "Habitat pressures from mining corridors; biodiversity conservation needed.",
+          "evidence": "SAPCC emphasizes habitat protection in mining-impacted talukas.",
           "source_tag": "SAPCC Habitat"
-        },
-        "Coastal": {
-          "level": "Low",
-          "description": "Interior taluka—limited direct SLR exposure; downstream flooding still relevant.",
-          "evidence": "Non-coastal location.",
-          "source_tag": "Topo/SAPCC Flood"
         }
       }
     },
@@ -169,39 +79,15 @@
       "risks": {
         "Forests_Biodiversity": {
           "level": "Medium",
-          "description": "Western Ghats ecosystems sensitive to warming & rainfall shifts; EBA prioritized.",
-          "evidence": "SAPCC emphasizes habitat conservation and EBA in hilly/ghat areas.",
+          "description": "Western Ghats biodiversity sensitive to climate shifts; EBA prioritized.",
+          "evidence": "SAPCC highlights habitat and corridor conservation needs.",
           "source_tag": "SAPCC Habitat/EBA"
         },
         "Water": {
           "level": "Statewide concern",
-          "description": "Headwater catchments face variability; storage & soil-moisture measures required.",
-          "evidence": "Water security under warming + extremes likely to deteriorate.",
+          "description": "Catchment variability leads to flash floods and dry-season stress.",
+          "evidence": "Water security impacts noted under climate projections.",
           "source_tag": "SAPCC Water"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Rain-fed belts exposed to monsoon variability; extreme rain damages.",
-          "evidence": "Increase in heavy rainfall.",
-          "source_tag": "SAPCC Agriculture/Extremes"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Heat stress and extreme events increase risks.",
-          "evidence": "↑ temps; ↑ heavy rain.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Urban_Flooding": {
-          "level": "Low",
-          "description": "Lower urbanization; localized flash-flood risks remain.",
-          "evidence": "Taluka profile + extremes.",
-          "source_tag": "SAPCC Extremes"
-        },
-        "Coastal": {
-          "level": "Low",
-          "description": "Non-coastal; indirect impacts via basin flooding.",
-          "evidence": "Interior taluka.",
-          "source_tag": "Topo/SAPCC Flood"
         }
       }
     },
@@ -210,39 +96,15 @@
       "risks": {
         "Water": {
           "level": "Statewide concern",
-          "description": "Central Goa water security stress from warming/ET and rainfall variability.",
-          "evidence": "SAPCC water security deterioration under CC.",
+          "description": "Central Goa water demand & supply stress under variable rainfall.",
+          "evidence": "SAPCC water security sections.",
           "source_tag": "SAPCC Water"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Rainfall variability affects cropping; flood pulses possible in low tracts.",
-          "evidence": "↑ extremes; variable mean rainfall.",
-          "source_tag": "SAPCC Agriculture/Extremes"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "More hot days; health burden from heat/extremes.",
-          "evidence": "Max temps trend; 40°C days by ~2040.",
-          "source_tag": "SAPCC Extremes/Health"
         },
         "Urban_Flooding": {
           "level": "Medium",
-          "description": "Intense rainfall can overwhelm drains in growing settlements.",
-          "evidence": "Very heavy rainfall increasing.",
+          "description": "Rapid urbanization with insufficient drainage increases pluvial flood risk.",
+          "evidence": "Increase in very heavy rainfall and urban flooding notes.",
           "source_tag": "SAPCC Extremes"
-        },
-        "Forests_Biodiversity": {
-          "level": "Statewide concern",
-          "description": "Green buffer/wetland roles emphasized in SAPCC.",
-          "evidence": "Habitat & wetland actions.",
-          "source_tag": "SAPCC Habitat"
-        },
-        "Coastal": {
-          "level": "Low",
-          "description": "Interior taluka; indirect coastal impacts minimal.",
-          "evidence": "Non-coastal.",
-          "source_tag": "Topo"
         }
       }
     }
@@ -253,39 +115,15 @@
       "risks": {
         "Coastal": {
           "level": "High",
-          "description": "Port/estuarine coastline exposure to surge, SLR and short-duration extreme rainfall.",
-          "evidence": "Coastal exposure & low-lying zones.",
-          "source_tag": "SAPCC Coast/Flood"
-        },
-        "Urban_Flooding": {
-          "level": "Medium",
-          "description": "High imperviousness + cloudbursts elevate pluvial flood risk.",
-          "evidence": "Increase in very heavy & exceptional rain events.",
-          "source_tag": "SAPCC Extremes"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Water security stress from warming and rainfall variability.",
-          "evidence": "↑ ET with warming; variable rainfall.",
-          "source_tag": "SAPCC Water"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Localized paddy belts face waterlogging and saline ingress risks.",
-          "evidence": "Coastal + flood dynamics.",
-          "source_tag": "SAPCC Agriculture/Coast"
+          "description": "Port/estuarine exposure to surge and SLR; port infrastructure vulnerable.",
+          "evidence": "SAPCC indicates coastal port zones as high exposure.",
+          "source_tag": "SAPCC Coast"
         },
         "Health": {
           "level": "Medium",
-          "description": "Heat stress and flood-related health risks.",
-          "evidence": "↑ temps; ↑ extremes.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Forests_Biodiversity": {
-          "level": "Statewide concern",
-          "description": "Wetland/blue-green buffers recommended.",
-          "evidence": "SAPCC wetland roles.",
-          "source_tag": "SAPCC Habitat"
+          "description": "Respiratory and heat-related health burdens near industrial/port activities.",
+          "evidence": "Local industrial emissions + heat stress discussed in SAPCC health section.",
+          "source_tag": "SAPCC Health"
         }
       }
     },
@@ -294,39 +132,15 @@
       "risks": {
         "Coastal": {
           "level": "High",
-          "description": "Coastal tourism beaches with erosion/SLR/flood exposure.",
-          "evidence": "Coastal taluka + low elevation.",
-          "source_tag": "SAPCC Coast/Flood"
+          "description": "Beach erosion (Colva/Benaulim) and saltwater intrusion concerns.",
+          "evidence": "Coastal tourism shores experience erosion and inundation risk.",
+          "source_tag": "SAPCC Coast"
         },
         "Urban_Flooding": {
           "level": "Medium",
-          "description": "Short-duration extreme rainfall overwhelms drains in urbanizing areas.",
-          "evidence": "Rising very heavy & exceptional rains.",
+          "description": "Margao & nearby urban centres experience drainage overloads in heavy rain.",
+          "evidence": "SAPCC cites increasing urban flood incidents.",
           "source_tag": "SAPCC Extremes"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Higher ET + variability stresses supply and quality.",
-          "evidence": "Water security deterioration likely.",
-          "source_tag": "SAPCC Water"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Paddy belts sensitive to floods/saline ingress; horticulture affected by extremes.",
-          "evidence": "Extreme rainfall and coastal notes.",
-          "source_tag": "SAPCC Agriculture/Coast"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Heat and extreme rainfall health burdens.",
-          "evidence": "↑ max temps; ↑ extremes.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Forests_Biodiversity": {
-          "level": "Statewide concern",
-          "description": "Blue-green infrastructure emphasis.",
-          "evidence": "SAPCC habitat/wetland measures.",
-          "source_tag": "SAPCC Habitat"
         }
       }
     },
@@ -335,39 +149,15 @@
       "risks": {
         "Forests_Biodiversity": {
           "level": "Medium",
-          "description": "Western Ghats edge; ecosystem-based adaptation and corridor integrity emphasized.",
-          "evidence": "Habitat/EBA actions in SAPCC.",
-          "source_tag": "SAPCC Habitat/EBA"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Monsoon variability with extreme events; storage & soil-moisture practices needed.",
-          "evidence": "Water security likely to deteriorate.",
-          "source_tag": "SAPCC Water"
+          "description": "Edge-of-Ghats biodiversity needs corridor conservation and restoration.",
+          "evidence": "SAPCC emphasises ecosystem-based adaptation in Ghats fringe talukas.",
+          "source_tag": "SAPCC Habitat"
         },
         "Agriculture": {
           "level": "Statewide concern",
-          "description": "Rain-fed systems sensitive to extremes; local flood pulses.",
-          "evidence": "↑ very heavy rains.",
-          "source_tag": "SAPCC Agriculture/Extremes"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Rising heat stress days inland.",
-          "evidence": "Temperature projections incl. 40°C days.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Urban_Flooding": {
-          "level": "Low",
-          "description": "Less urbanized; localized flash flooding possible.",
-          "evidence": "Extreme rainfall trend.",
-          "source_tag": "SAPCC Extremes"
-        },
-        "Coastal": {
-          "level": "Low",
-          "description": "Interior taluka; indirect coastal impacts minimal.",
-          "evidence": "Non-coastal.",
-          "source_tag": "Topo"
+          "description": "Rain-fed agriculture vulnerable to changing monsoon intensity.",
+          "evidence": "SAPCC agriculture resilience sections.",
+          "source_tag": "SAPCC Agriculture"
         }
       }
     },
@@ -376,39 +166,15 @@
       "risks": {
         "Forests_Biodiversity": {
           "level": "Medium",
-          "description": "Ghats & protected areas—climate-sensitive habitats; EBA priority.",
-          "evidence": "SAPCC habitat/EBA direction.",
-          "source_tag": "SAPCC Habitat/EBA"
+          "description": "Protected areas and corridors sensitive to climate impacts and fragmentation.",
+          "evidence": "SAPCC prioritizes Ghats conservation measures.",
+          "source_tag": "SAPCC Habitat"
         },
         "Water": {
           "level": "Statewide concern",
-          "description": "Headwater/catchment sensitivity to variability; need for storage & watershed works.",
-          "evidence": "Water security under warming + extremes.",
+          "description": "Catchment variability and storage need for hydrological resilience.",
+          "evidence": "SAPCC water resource recommendations.",
           "source_tag": "SAPCC Water"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Rain-fed agriculture exposed to extreme rainfall swings.",
-          "evidence": "↑ heavy/extreme rainfall.",
-          "source_tag": "SAPCC Agriculture/Extremes"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Heat + flood-related health risks.",
-          "evidence": "Temp rise; extremes rise.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Urban_Flooding": {
-          "level": "Low",
-          "description": "Lower urbanization; local flash floods in valleys.",
-          "evidence": "Extreme rainfall increase.",
-          "source_tag": "SAPCC Extremes"
-        },
-        "Coastal": {
-          "level": "Low",
-          "description": "No direct coastline.",
-          "evidence": "Interior taluka.",
-          "source_tag": "Topo"
         }
       }
     },
@@ -417,84 +183,32 @@
       "risks": {
         "Forests_Biodiversity": {
           "level": "Medium",
-          "description": "Western Ghats interface; ecosystem restoration and corridor continuity prioritized.",
-          "evidence": "SAPCC habitat/EBA.",
-          "source_tag": "SAPCC Habitat/EBA"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Catchment/ET/rainfall variability challenges.",
-          "evidence": "Water security deterioration likely.",
-          "source_tag": "SAPCC Water"
+          "description": "Mollem forests and corridor integrity need protection from linear projects.",
+          "evidence": "SAPCC highlights infrastructure risks to forest connectivity.",
+          "source_tag": "SAPCC Habitat"
         },
         "Agriculture": {
           "level": "Statewide concern",
-          "description": "Rainfall extremes disrupt rain-fed cycles.",
-          "evidence": "Rising very heavy rainfall events.",
-          "source_tag": "SAPCC Extremes"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Heat stress and extreme-event health burden increasing.",
-          "evidence": "↑ temps; 40°C days expected.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Urban_Flooding": {
-          "level": "Low",
-          "description": "Localized flash flooding in valleys/streams during cloudbursts.",
-          "evidence": "Extreme rainfall trend.",
-          "source_tag": "SAPCC Extremes"
-        },
-        "Coastal": {
-          "level": "Low",
-          "description": "No direct SLR exposure.",
-          "evidence": "Interior taluka.",
-          "source_tag": "Topo"
+          "description": "Rain-fed systems and plantations exposed to extremes.",
+          "evidence": "SAPCC agrarian notes on climate variability.",
+          "source_tag": "SAPCC Agriculture"
         }
       }
-    },
-    "Quepem": {
-      "location": [15.230, 74.070],
-      "risks": {} 
     },
     "Canacona": {
       "location": [15.018, 74.023],
       "risks": {
         "Coastal": {
           "level": "High",
-          "description": "Coastal tourism hubs with beach erosion, surge and SLR exposure; village-level studies show high climate vulnerability.",
-          "evidence": "Coastal exposure; recent assessments of high vulnerability in coastal villages.",
-          "source_tag": "SAPCC Coast; recent studies"
-        },
-        "Urban_Flooding": {
-          "level": "Medium",
-          "description": "Localized flash/pluvial floods during intense monsoon spells.",
-          "evidence": "Increase in very heavy/extreme rainfall events.",
-          "source_tag": "SAPCC Extremes"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Warming + variability stress freshwater and wells; saline ingress risk along coast.",
-          "evidence": "Water security likely to deteriorate; coastal saline risk.",
-          "source_tag": "SAPCC Water/Coast"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Rainfall swings affect paddy & horticulture; flood/saline pulses near coast.",
-          "evidence": "Extremes + coastal notes.",
-          "source_tag": "SAPCC Agriculture/Coast"
+          "description": "Tourism beaches (Palolem/Agonda) face erosion, SLR and storm surge risk.",
+          "evidence": "Coastal taluka with high tourism-reliant communities.",
+          "source_tag": "SAPCC Coast"
         },
         "Health": {
           "level": "Medium",
-          "description": "Heat stress and extreme-rain health impacts.",
-          "evidence": "↑ temps; ↑ extremes.",
-          "source_tag": "SAPCC Extremes/Health"
-        },
-        "Forests_Biodiversity": {
-          "level": "Statewide concern",
-          "description": "Ecosystem-based adaptation and dune/wetland buffers emphasized.",
-          "evidence": "SAPCC habitat/wetlands.",
-          "source_tag": "SAPCC Habitat/Wetlands"
+          "description": "Post-flood water-borne disease risks and heat exposure.",
+          "evidence": "SAPCC health and extremes references.",
+          "source_tag": "SAPCC Health"
         }
       }
     }
