@@ -7,7 +7,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // Load risk data
-fetch("riskData.json")
+fetch("/riskData.json")
   .then((response) => response.json())
   .then((riskData) => {
     // Add markers for districts
