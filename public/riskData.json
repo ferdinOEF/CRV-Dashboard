@@ -1,0 +1,12 @@
+{
+  "North Goa": {
+    "Sea Level Rise": "High exposure along coastal belt",
+    "Cyclone Risk": "Moderate",
+    "Flooding": "Frequent in monsoon season"
+  },
+  "South Goa": {
+    "Sea Level Rise": "Very High in coastal talukas",
+    "Cyclone Risk": "Low to Moderate",
+    "Flooding": "Localized flash floods during heavy rains"
+  }
+}
