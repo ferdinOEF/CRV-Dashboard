@@ -9,7 +9,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const infoPanel = document.getElementById("info");
 
 // Load JSON
-fetch("riskData.json")
+fetch("/riskData.json")
   .then(response => response.json())
   .then(data => {
     const heatPoints = [];
