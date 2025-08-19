@@ -1,0 +1,46 @@
+/* General page styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* Map container */
+#map {
+  position: absolute;
+  top: 0;
+  left: 250px; /* leaves room for side panel */
+  right: 0;
+  bottom: 150px; /* leaves room for bottom panel */
+}
+
+/* Side panel */
+#side-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  bottom: 0;
+  background: #f8f9fa;
+  padding: 10px;
+  overflow-y: auto;
+  border-right: 2px solid #ccc;
+}
+
+#side-panel h2 {
+  margin-top: 0;
+}
+
+/* Info panel at bottom */
+#info-panel {
+  position: absolute;
+  bottom: 0;
+  left: 250px;
+  right: 0;
+  height: 150px;
+  background: #ffffff;
+  border-top: 2px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+}
