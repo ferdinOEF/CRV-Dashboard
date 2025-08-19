@@ -1,62 +1,83 @@
-let currentTheme = "All";
-
-// Fetch data
-fetch('riskData.json')
-  .then(response => response.json())
-  .then(data => {
-    const markers = [];
-
-    function renderMarkers(theme) {
-      // Clear old markers
-      markers.forEach(m => map.removeLayer(m));
-      markers.length = 0;
-
-      data.talukas.forEach(taluka => {
-        const marker = L.marker([taluka.lat, taluka.lng]).addTo(map);
-
-        let popupContent = `<h3>${taluka.name}</h3>`;
-
-        if (theme === "All") {
-          for (const [t, risks] of Object.entries(taluka.themes)) {
-            popupContent += `<strong>${t}</strong><ul>`;
-            risks.forEach(risk => popupContent += `<li>${risk}</li>`);
-            popupContent += `</ul>`;
-          }
-        } else if (taluka.themes[theme]) {
-          popupContent += `<strong>${theme}</strong><ul>`;
-          taluka.themes[theme].forEach(risk => popupContent += `<li>${risk}</li>`);
-          popupContent += `</ul>`;
-        } else {
-          popupContent += `<em>No data for ${theme}</em>`;
-        }
-
-        marker.bindPopup(popupContent);
-        markers.push(marker);
-      });
+{
+  "North Goa": {
+    "Bardez": {
+      "Coastal & Marine": "Erosion hotspots at Candolim, Baga, and Calangute; saline ingress affecting agriculture",
+      "Forests & Biodiversity": "Pressure from tourism and settlements; fragmented mangrove patches",
+      "Water Resources": "Groundwater stress due to borewell extraction; seasonal scarcity in villages",
+      "Health": "Vector-borne diseases like malaria & dengue rise during monsoon",
+      "Agriculture": "Decline in paddy cultivation; salinity ingress in khazan lands"
+    },
+    "Tiswadi": {
+      "Coastal & Marine": "Shoreline erosion at Dona Paula; risk to fishing villages",
+      "Forests & Biodiversity": "Mangrove degradation near Chicalim & Ribandar",
+      "Water Resources": "Pollution stress on Mandovi river",
+      "Health": "Air pollution hotspots near Panaji & Verna industrial belt",
+      "Agriculture": "High risk to khazan farming from sea-level rise"
+    },
+    "Bicholim": {
+      "Coastal & Marine": "Inland flooding risk due to river overflows",
+      "Forests & Biodiversity": "Mining areas degraded, biodiversity loss in Mhadei WLS buffer",
+      "Water Resources": "Water stress from mining pits and river pollution",
+      "Health": "Respiratory issues due to mining dust",
+      "Agriculture": "Soil fertility decline due to mining and sand excavation"
+    },
+    "Pernem": {
+      "Coastal & Marine": "Severe erosion at Morjim, Mandrem, Arambol",
+      "Forests & Biodiversity": "Loss of dune vegetation and turtle nesting grounds",
+      "Water Resources": "Salinity intrusion in wells near coast",
+      "Health": "Seasonal migrant labor vulnerable to heat stress",
+      "Agriculture": "Cashew productivity impacted by erratic rainfall"
+    },
+    "Sattari": {
+      "Coastal & Marine": "Not significant",
+      "Forests & Biodiversity": "High biodiversity in Mhadei WLS under threat from deforestation",
+      "Water Resources": "Heavy rainfall causes flash floods; dry season scarcity",
+      "Health": "Snakebites & vector-borne disease risk during monsoon",
+      "Agriculture": "Spice plantations affected by erratic rainfall"
     }
-
-    // Initial load
-    renderMarkers("All");
-
-    // Create theme filter dropdown
-    const select = L.control({position: 'topright'});
-    select.onAdd = function() {
-      const div = L.DomUtil.create('div', 'theme-filter');
-      div.innerHTML = `
-        <select id="themeSelect">
-          <option value="All">All Themes</option>
-          ${data.themes.map(t => `<option value="${t}">${t}</option>`).join('')}
-        </select>
-      `;
-      return div;
-    };
-    select.addTo(map);
-
-    // Handle dropdown change
-    document.addEventListener('change', e => {
-      if (e.target && e.target.id === "themeSelect") {
-        currentTheme = e.target.value;
-        renderMarkers(currentTheme);
-      }
-    });
-  });
+  },
+  "South Goa": {
+    "Salcete": {
+      "Coastal & Marine": "Erosion hotspots at Colva, Betalbatim, and Benaulim",
+      "Forests & Biodiversity": "Wetlands under threat from real estate",
+      "Water Resources": "Pollution of Sal river",
+      "Health": "Water-borne diseases from poor sewage",
+      "Agriculture": "Decline in khazan farming and saltpan activity"
+    },
+    "Mormugao": {
+      "Coastal & Marine": "Port activities increase risk of oil spills",
+      "Forests & Biodiversity": "Mangrove degradation near Zuari river mouth",
+      "Water Resources": "Salinity intrusion in groundwater",
+      "Health": "Respiratory illnesses from coal handling at port",
+      "Agriculture": "Fishing livelihoods at risk from port expansion"
+    },
+    "Canacona": {
+      "Coastal & Marine": "Erosion at Palolem and Galgibaga; turtle nesting under threat",
+      "Forests & Biodiversity": "Western Ghats biodiversity sensitive to deforestation",
+      "Water Resources": "Flash floods in monsoon due to high rainfall",
+      "Health": "Malaria and dengue hotspots",
+      "Agriculture": "Arecanut plantations vulnerable to pests and drought"
+    },
+    "Quepem": {
+      "Coastal & Marine": "Saline intrusion in river valleys",
+      "Forests & Biodiversity": "Deforestation from mining leases",
+      "Water Resources": "River Sal and Kushawati at pollution risk",
+      "Health": "Mining workers exposed to respiratory risks",
+      "Agriculture": "Coconut and paddy decline from water stress"
+    },
+    "Sanguem": {
+      "Coastal & Marine": "Not significant",
+      "Forests & Biodiversity": "Mining impact on Bhagwan Mahavir Sanctuary buffer",
+      "Water Resources": "Water shortages in summer months",
+      "Health": "Respiratory illnesses in mining areas",
+      "Agriculture": "Cashew and sugarcane productivity declining"
+    },
+    "Dharbandora": {
+      "Coastal & Marine": "Not significant",
+      "Forests & Biodiversity": "Part of Mollem forests under pressure from infrastructure projects",
+      "Water Resources": "Streams dry up in summer despite heavy rainfall",
+      "Health": "Heat stress increasing in dry season",
+      "Agriculture": "Spices and cashew affected by erratic climate"
+    }
+  }
+}
