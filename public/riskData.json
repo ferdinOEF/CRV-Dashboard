@@ -1,51 +1,112 @@
 {
   "North Goa": {
     "Bardez": {
-      "Agriculture": "Salinity intrusion affecting paddy fields",
-      "Water Resources": "Groundwater depletion in coastal villages",
-      "Health": "Increase in vector-borne diseases during monsoon"
+      "Water": {
+        "Vulnerability": "Groundwater depletion and saline intrusion",
+        "Risks": ["Over-extraction for tourism", "Reduced rainfall recharge"]
+      },
+      "Agriculture": {
+        "Vulnerability": "Decline in crop yields",
+        "Risks": ["Heat stress on paddy", "Pest outbreaks"]
+      },
+      "Forests": {
+        "Vulnerability": "Loss of biodiversity",
+        "Risks": ["Forest fires", "Encroachment"]
+      },
+      "Health": {
+        "Vulnerability": "Heat-related illness rise",
+        "Risks": ["Vector-borne diseases (dengue/malaria)"]
+      },
+      "Coastal": {
+        "Vulnerability": "Shoreline erosion",
+        "Risks": ["Loss of beaches", "Saltwater intrusion"]
+      }
     },
     "Pernem": {
-      "Agriculture": "Erratic rainfall impacting cashew and rice",
-      "Fisheries": "Shoreline erosion reducing fish landing sites"
+      "Water": {
+        "Vulnerability": "Erratic rainfall",
+        "Risks": ["Flash floods", "Seasonal water scarcity"]
+      },
+      "Agriculture": {
+        "Vulnerability": "Cashew & coconut productivity decline",
+        "Risks": ["Unseasonal rains damaging flowers"]
+      },
+      "Fisheries": {
+        "Vulnerability": "Marine productivity loss",
+        "Risks": ["Temperature stress on fish stocks"]
+      }
     },
     "Bicholim": {
-      "Mining": "Abandoned mines causing soil and water pollution",
-      "Biodiversity": "Forest degradation threatening wildlife"
-    },
-    "Tiswadi": {
-      "Urban Heat": "Panaji facing heat island effect",
-      "Water Supply": "Opa water works under stress in dry season"
-    },
-    "Sattari": {
-      "Forests": "Changing rainfall patterns stressing Western Ghats flora",
-      "Disaster Risk": "Flash floods and landslides in hilly terrain"
+      "Forests": {
+        "Vulnerability": "Mining impact",
+        "Risks": ["Deforestation from illegal mining"]
+      },
+      "Water": {
+        "Vulnerability": "River pollution",
+        "Risks": ["Acid mine drainage in Mandovi basin"]
+      }
     }
   },
   "South Goa": {
     "Salcete": {
-      "Urban": "Margao experiencing flooding due to poor drainage",
-      "Tourism": "Coastal resorts exposed to sea-level rise"
+      "Water": {
+        "Vulnerability": "Declining aquifers",
+        "Risks": ["Over-extraction from hotels", "Saltwater ingress"]
+      },
+      "Health": {
+        "Vulnerability": "Disease outbreaks",
+        "Risks": ["Leptospirosis after floods"]
+      }
     },
     "Mormugao": {
-      "Ports": "MPT infrastructure vulnerable to storm surges",
-      "Air Quality": "Ship emissions worsening respiratory issues"
+      "Coastal": {
+        "Vulnerability": "Sea-level rise impact",
+        "Risks": ["Port infrastructure damage", "Flooding of low-lying wards"]
+      },
+      "Air Quality": {
+        "Vulnerability": "Coal dust pollution",
+        "Risks": ["Respiratory diseases"]
+      }
     },
     "Canacona": {
-      "Cyclones": "Beaches and fishing villages at high cyclone risk",
-      "Biodiversity": "Turtle nesting beaches under threat"
+      "Forests": {
+        "Vulnerability": "Cyclone damage to mangroves",
+        "Risks": ["Loss of coastal protection"]
+      },
+      "Tourism": {
+        "Vulnerability": "Beach erosion",
+        "Risks": ["Impact on shacks & livelihoods"]
+      }
     },
     "Quepem": {
-      "Agriculture": "Decline in rain-fed crops due to rainfall shifts",
-      "Forests": "Encroachment and deforestation increasing vulnerability"
+      "Agriculture": {
+        "Vulnerability": "Rain-fed paddy at risk",
+        "Risks": ["Monsoon variability"]
+      },
+      "Mining": {
+        "Vulnerability": "Soil & water contamination",
+        "Risks": ["Flooding from abandoned pits"]
+      }
     },
     "Sanguem": {
-      "Water Resources": "Dams under pressure from erratic inflows",
-      "Mining": "Illegal mining polluting rivers"
+      "Forests": {
+        "Vulnerability": "Western Ghats biodiversity loss",
+        "Risks": ["Habitat fragmentation"]
+      },
+      "Water": {
+        "Vulnerability": "Hydropower stress",
+        "Risks": ["Variable rainfall reducing generation"]
+      }
     },
     "Dharbandora": {
-      "Biodiversity": "Bhagwan Mahavir Sanctuary impacted by climate shifts",
-      "Tourism": "Eco-tourism at risk from extreme weather"
+      "Agriculture": {
+        "Vulnerability": "Sugarcane productivity decline",
+        "Risks": ["Water scarcity in dry months"]
+      },
+      "Health": {
+        "Vulnerability": "Vector-borne diseases",
+        "Risks": ["Increased mosquito breeding"]
+      }
     }
   }
 }
