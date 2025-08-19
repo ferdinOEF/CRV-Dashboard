@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Goa Climate Risk Dashboard</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      grid-template-rows: 1fr 200px;
+      grid-template-areas:
+        "sidebar map"
+        "bottom bottom";
+    }
+    #sidebar {
+      grid-area: sidebar;
+      background: #f8f9fa;
+      padding: 15px;
+      border-right: 1px solid #ccc;
+    }
+    #map {
+      grid-area: map;
+      height: 100%;
+      width: 100%;
+    }
+    #bottom-panel {
+      grid-area: bottom;
+      background: #fff;
+      border-top: 1px solid #ccc;
+      padding: 10px;
+      overflow-y: auto;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <h2>Goa Climate Risks</h2>
+    <p>Click on a district marker to view risks</p>
+  </div>
+  <div id="map"></div>
+  <div id="bottom-panel">
+    <strong>Risk Details:</strong>
+    <div id="info-panel">Select a region to view details.</div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize map
+    const map = L.map("map").setView([15.4, 73.9], 9);
+
+    // Base map layer
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Load risk data
+    fetch("/riskData.json")
+      .then(response => {
+        if (!response.ok) throw new Error("Failed to load riskData.json");
+        return response.json();
+      })
+      .then(riskData => {
+        // Add markers
+        const northGoa = L.marker([15.6, 73.8]).addTo(map)
+          .bindPopup("North Goa – Click for Risks")
+          .on("click", () => showRiskDetails("North Goa", riskData));
+
+        const southGoa = L.marker([15.2, 74.0]).addTo(map)
+          .bindPopup("South Goa – Click for Risks")
+          .on("click", () => showRiskDetails("South Goa", riskData));
+
+        function showRiskDetails(region, data) {
+          const risks = data[region];
+          if (!risks) {
+            document.getElementById("info-panel").innerHTML = `No data for ${region}`;
+            return;
+          }
+          let details = `<h3>${region}</h3><ul>`;
+          for (const [key, value] of Object.entries(risks)) {
+            details += `<li><strong>${key}:</strong> ${value}</li>`;
+          }
+          details += "</ul>";
+          document.getElementById("info-panel").innerHTML = details;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("info-panel").innerText = "Error loading risk data.";
+      });
+  </script>
+</body>
+</html>
