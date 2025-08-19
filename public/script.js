@@ -1,70 +1,44 @@
-// script.js
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize the map
+  const map = L.map("map").setView([15.5, 74], 9);
 
-let map;
-let riskData = {};
-let markers = [];
-
-// Initialize map
-function initMap() {
-  map = L.map('map').setView([15.2993, 74.1240], 9);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; OpenStreetMap contributors'
+  // Add base layer
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OpenStreetMap contributors"
   }).addTo(map);
 
-  // Load riskData.json
-  fetch('/riskData.json')
+  // Load JSON data
+  fetch("riskData.json")
     .then(response => response.json())
     .then(data => {
-      riskData = data;
-      console.log("✅ Risk data loaded:", riskData);
+      // Iterate over each taluka in JSON
+      for (const [taluka, info] of Object.entries(data)) {
+        if (!info.coordinates) {
+          console.warn(`⚠️ No coordinates for ${taluka}, skipping marker`);
+          continue;
+        }
 
-      addTalukaMarkers();
+        const marker = L.marker(info.coordinates).addTo(map);
+
+        // On marker click, show details in sidebar
+        marker.on("click", () => {
+          showTalukaData(taluka, info);
+        });
+      }
     })
-    .catch(err => console.error("❌ Error loading riskData.json:", err));
-}
+    .catch(err => console.error("Error loading riskData.json:", err));
 
-// Add markers for each taluka
-function addTalukaMarkers() {
-  Object.keys(riskData).forEach(taluka => {
-    const { lat, lng } = riskData[taluka];
-
-    if (!lat || !lng) {
-      console.warn(`⚠️ No coordinates for ${taluka}, skipping marker`);
+  // Function to update sidebar content
+  function showTalukaData(talukaName, data) {
+    const container = document.getElementById("talukaData");
+    if (!container) {
+      console.error("No #talukaData element found!");
       return;
     }
-
-    const marker = L.marker([lat, lng]).addTo(map);
-    marker.on('click', () => showTalukaData(taluka));
-    markers.push(marker);
-  });
-}
-
-// Show taluka data when clicked
-function showTalukaData(taluka) {
-  console.log(`📍 Marker clicked: ${taluka}`);
-
-  const data = riskData[taluka];
-  const infoDiv = document.getElementById('taluka-info');
-
-  if (!data) {
-    console.error(`❌ No data found for: ${taluka}`);
-    infoDiv.innerHTML = `<h3>${taluka}</h3><p>No data available.</p>`;
-    return;
+    container.innerHTML = `
+      <h3>${talukaName}</h3>
+      <p><strong>Theme:</strong> ${data.theme}</p>
+      <p><strong>Vulnerabilities:</strong> ${data.vulnerabilities}</p>
+    `;
   }
-
-  // Extract themes dynamically (excluding lat/lng keys)
-  const themes = Object.keys(data).filter(key => key !== "lat" && key !== "lng");
-
-  let html = `<h3>${taluka}</h3><ul>`;
-  themes.forEach(theme => {
-    html += `<li><strong>${theme}:</strong> ${data[theme]}</li>`;
-  });
-  html += `</ul>`;
-
-  infoDiv.innerHTML = html;
-}
-
-// Initialize map on load
-document.addEventListener('DOMContentLoaded', initMap);
+});
