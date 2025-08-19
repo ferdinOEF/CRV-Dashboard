@@ -1,46 +1,44 @@
-/* General page styling */
-body, html {
+/* Layout */
+body {
   margin: 0;
-  padding: 0;
-  height: 100%;
+  display: flex;
   font-family: Arial, sans-serif;
 }
 
 /* Map container */
 #map {
-  position: absolute;
-  top: 0;
-  left: 250px; /* leaves room for side panel */
-  right: 0;
-  bottom: 150px; /* leaves room for bottom panel */
+  height: 100vh;
+  width: 75%;
 }
 
-/* Side panel */
-#side-panel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 250px;
-  bottom: 0;
-  background: #f8f9fa;
-  padding: 10px;
-  overflow-y: auto;
-  border-right: 2px solid #ccc;
-}
-
-#side-panel h2 {
-  margin-top: 0;
-}
-
-/* Info panel at bottom */
+/* Side info panel */
 #info-panel {
-  position: absolute;
-  bottom: 0;
-  left: 250px;
-  right: 0;
-  height: 150px;
-  background: #ffffff;
-  border-top: 2px solid #ccc;
-  padding: 10px;
+  width: 25%;
+  height: 100vh;
   overflow-y: auto;
+  padding: 15px;
+  background: #f9f9f9;
+  border-left: 2px solid #ddd;
+}
+
+#info-panel h2 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+#info-panel ul {
+  list-style-type: none;
+  padding-left: 15px;
+}
+
+#info-panel li {
+  margin: 4px 0;
+  line-height: 1.4em;
+}
+
+/* Nested list styles */
+#info-panel ul ul {
+  margin-left: 15px;
+  border-left: 2px solid #ddd;
+  padding-left: 10px;
 }
