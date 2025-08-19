@@ -1,60 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Goa Climate Risk Dashboard</title>
-  <!-- Leaflet CSS -->
-  <link 
-    rel="stylesheet" 
-    href="https://unpkg.com/leaflet/dist/leaflet.css"
-  />
+  <meta charset="UTF-8">
+  <title>Goa Climate Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
   <style>
-    body {
-      margin: 0;
-      display: flex;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-    }
-    #side-panel {
-      width: 250px;
-      background: #f4f4f4;
-      padding: 10px;
-      overflow-y: auto;
-      border-right: 1px solid #ccc;
-    }
-    #map {
-      flex: 1;
-      height: 100%;
-    }
-    #info-panel {
-      margin-top: 20px;
-      padding: 10px;
-      background: #fff;
-      border: 1px solid #ccc;
-    }
+    body, html { margin:0; padding:0; height:100%; font-family:sans-serif; }
+    #app { display:flex; height:100%; width:100%; }
+    #sidebar { width:250px; background:#f4f4f4; padding:10px; overflow-y:auto; }
+    #map { flex:1; }
+    #info-panel { margin-top:15px; font-size:14px; }
   </style>
 </head>
 <body>
-  <div id="side-panel">
-    <h3>Goa Climate Risks</h3>
-    <p>Click on a district marker to view risks</p>
-    <div id="info-panel">No data selected</div>
+  <div id="app">
+    <div id="sidebar">
+      <h2>Goa Climate Risks</h2>
+      <p>Click on a district marker to view risks</p>
+      <div id="info-panel"></div>
+    </div>
+    <div id="map"></div>
   </div>
-  <div id="map"></div>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     // Initialize map
-    var map = L.map('map').setView([15.4, 74.0], 9);
-
-    // Add OpenStreetMap base tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
+    var map = L.map("map").setView([15.4, 74.0], 9);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors"
     }).addTo(map);
 
-    // Dummy risk data (embedded here)
-    const riskData = {
-      "North Goa": {
-        "Coastal Erosion Risk Index": "High
+    // Load risk data
+    fetch("/riskData.json")
+      .then(res => {
+        if (!res.ok) throw new Error("riskData.json not found");
+        return res.json();
+      })
+      .then(riskData => {
+        // Markers
+        const northGoa = L.marker([15.6, 73.8]).addTo(map)
+          .bindPopup("North Goa")
+          .on("click", () => showRiskDetails("North Goa", riskData));
+
+        const southGoa = L.marker([15.2, 74.0]).addTo(map)
+          .bindPopup("South Goa")
+          .on("click", () => showRiskDetails("South Goa", riskData));
+
+        function showRiskDetails(region, data) {
+          let risks = data[region];
+          if (!risks) {
+            document.getElementById("info-panel").innerHTML = `<b>${region}</b><br>No data available`;
+            return;
+          }
+          let details = `<h3>${region}</h3>`;
+          for (let [key, val] of Object.entries(risks)) {
+            details += `<p><b>${key}</b>: ${val}</p>`;
+          }
+          document.getElementById("info-panel").innerHTML = details;
+        }
+      })
+      .catch(err => {
+        document.getElementById("info-panel").innerHTML =
+          "<p style='color:red'>Error: " + err.message + "</p>";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
