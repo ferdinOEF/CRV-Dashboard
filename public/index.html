@@ -11,19 +11,32 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Goa Climate Risk Dashboard</h1>
-  <p>Click a taluka marker to view SAPCC-aligned vulnerabilities by theme.</p>
+  <header>
+    <h1>Goa Climate Risk Dashboard</h1>
+    <p>Click a taluka marker to view SAPCC-aligned vulnerabilities by theme.</p>
+  </header>
 
+  <div id="map"></div>
+
+  <!-- Controls overlay -->
   <div id="controls">
-    <label for="themeFilter">Theme filter: </label>
+    <label for="themeFilter">Theme:</label>
     <select id="themeFilter">
       <option value="All">All Themes</option>
     </select>
     <button id="toggleHeatmap">Toggle Heatmap</button>
   </div>
 
-  <div id="map"></div>
+  <!-- Legend overlay -->
+  <div id="legend">
+    <h4>Risk Intensity</h4>
+    <i style="background:#2ecc71"></i> Low (0.5–0.6)<br>
+    <i style="background:#f1c40f"></i> Medium (0.61–0.7)<br>
+    <i style="background:#e67e22"></i> High (0.71–0.75)<br>
+    <i style="background:#e74c3c"></i> Very High (0.76–0.8)
+  </div>
 
+  <!-- Sidebar -->
   <div id="talukaData">
     <p><em>Select a taluka to see detailed vulnerabilities.</em></p>
   </div>
