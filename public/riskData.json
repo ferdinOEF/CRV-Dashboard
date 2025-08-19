@@ -1,216 +1,123 @@
 {
   "North Goa": {
-    "Pernem": {
-      "location": [15.722, 73.795],
-      "risks": {
-        "Coastal": {
-          "level": "High",
-          "description": "Low-lying coastal exposure; beach/shoreline sensitivity and storm-surge/SLR risk.",
-          "evidence": "Coastal talukas face SLR and extreme rainfall-driven flooding; ~15% land <15m elevation highly vulnerable.",
-          "source_tag": "SAPCC Flood/Coast"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Water security stressed by higher evapotranspiration and uneven rainfall recharge.",
-          "evidence": "Projected temperature rise increases evapotranspiration; rainfall variability increases.",
-          "source_tag": "SAPCC Water"
-        }
-      }
-    },
-    "Bardez": {
-      "location": [15.603, 73.767],
-      "risks": {
-        "Coastal": {
-          "level": "High",
-          "description": "High coastal exposure with tourism beaches; erosion and surge risk.",
-          "evidence": "Coastal taluka with popular beaches; low-lying exposure noted.",
-          "source_tag": "SAPCC Coast"
-        },
-        "Urban_Flooding": {
-          "level": "High",
-          "description": "Flood-prone wards & urban drainage stress; high vulnerability in trend analyses.",
-          "evidence": "SAPCC flood vulnerability map: Bardez most vulnerable to flooding-related hazards.",
-          "source_tag": "SAPCC Flood"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Tourism-driven water extraction increases groundwater stress and saline intrusion risk.",
-          "evidence": "Water security and saline intrusion issues documented for coastal talukas.",
-          "source_tag": "SAPCC Water"
-        }
-      }
-    },
-    "Tiswadi": {
-      "location": [15.500, 73.830],
-      "risks": {
-        "Coastal": {
-          "level": "High",
-          "description": "Estuarine and low-lying zones exposed to surge and tidal flooding.",
-          "evidence": "Estuarine low zones and Mandovi estuary exposure.",
-          "source_tag": "SAPCC Coast"
-        },
-        "Urban_Flooding": {
-          "level": "Medium",
-          "description": "Short-duration intense rainfall causes urban drainage overload.",
-          "evidence": "Increase in very heavy rainfall events reported in SAPCC.",
-          "source_tag": "SAPCC Extremes"
-        }
-      }
-    },
-    "Bicholim": {
-      "location": [15.592, 73.944],
-      "risks": {
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Catchment degradation and mining runoff stress river quality.",
-          "evidence": "SAPCC notes catchment restoration for impacted mining areas.",
-          "source_tag": "SAPCC Water"
-        },
-        "Forests_Biodiversity": {
-          "level": "Statewide concern",
-          "description": "Habitat pressures from mining corridors; biodiversity conservation needed.",
-          "evidence": "SAPCC emphasizes habitat protection in mining-impacted talukas.",
-          "source_tag": "SAPCC Habitat"
-        }
-      }
-    },
-    "Sattari": {
-      "location": [15.532, 74.126],
-      "risks": {
-        "Forests_Biodiversity": {
-          "level": "Medium",
-          "description": "Western Ghats biodiversity sensitive to climate shifts; EBA prioritized.",
-          "evidence": "SAPCC highlights habitat and corridor conservation needs.",
-          "source_tag": "SAPCC Habitat/EBA"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Catchment variability leads to flash floods and dry-season stress.",
-          "evidence": "Water security impacts noted under climate projections.",
-          "source_tag": "SAPCC Water"
-        }
-      }
-    },
-    "Ponda": {
-      "location": [15.408, 74.014],
-      "risks": {
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Central Goa water demand & supply stress under variable rainfall.",
-          "evidence": "SAPCC water security sections.",
-          "source_tag": "SAPCC Water"
-        },
-        "Urban_Flooding": {
-          "level": "Medium",
-          "description": "Rapid urbanization with insufficient drainage increases pluvial flood risk.",
-          "evidence": "Increase in very heavy rainfall and urban flooding notes.",
-          "source_tag": "SAPCC Extremes"
-        }
-      }
-    }
+    "lat": 15.555,
+    "lng": 73.912,
+    "Water": "Saline intrusion and reduced freshwater availability",
+    "Agriculture": "Crop stress from erratic rainfall and temperature rise",
+    "Forests & Biodiversity": "Habitat fragmentation and increased fire risk",
+    "Fisheries & Coastal": "Shoreline erosion and estuarine salinity shifts",
+    "Health": "Heat-related illnesses and vector-borne diseases",
+    "Infrastructure & Energy": "Urban flooding and grid disruptions",
+    "Tourism": "Beach erosion and stress on water resources"
   },
   "South Goa": {
-    "Mormugao": {
-      "location": [15.389, 73.815],
-      "risks": {
-        "Coastal": {
-          "level": "High",
-          "description": "Port/estuarine exposure to surge and SLR; port infrastructure vulnerable.",
-          "evidence": "SAPCC indicates coastal port zones as high exposure.",
-          "source_tag": "SAPCC Coast"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Respiratory and heat-related health burdens near industrial/port activities.",
-          "evidence": "Local industrial emissions + heat stress discussed in SAPCC health section.",
-          "source_tag": "SAPCC Health"
-        }
-      }
-    },
-    "Salcete": {
-      "location": [15.300, 73.957],
-      "risks": {
-        "Coastal": {
-          "level": "High",
-          "description": "Beach erosion (Colva/Benaulim) and saltwater intrusion concerns.",
-          "evidence": "Coastal tourism shores experience erosion and inundation risk.",
-          "source_tag": "SAPCC Coast"
-        },
-        "Urban_Flooding": {
-          "level": "Medium",
-          "description": "Margao & nearby urban centres experience drainage overloads in heavy rain.",
-          "evidence": "SAPCC cites increasing urban flood incidents.",
-          "source_tag": "SAPCC Extremes"
-        }
-      }
-    },
-    "Quepem": {
-      "location": [15.228, 74.070],
-      "risks": {
-        "Forests_Biodiversity": {
-          "level": "Medium",
-          "description": "Edge-of-Ghats biodiversity needs corridor conservation and restoration.",
-          "evidence": "SAPCC emphasises ecosystem-based adaptation in Ghats fringe talukas.",
-          "source_tag": "SAPCC Habitat"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Rain-fed agriculture vulnerable to changing monsoon intensity.",
-          "evidence": "SAPCC agriculture resilience sections.",
-          "source_tag": "SAPCC Agriculture"
-        }
-      }
-    },
-    "Sanguem": {
-      "location": [15.240, 74.165],
-      "risks": {
-        "Forests_Biodiversity": {
-          "level": "Medium",
-          "description": "Protected areas and corridors sensitive to climate impacts and fragmentation.",
-          "evidence": "SAPCC prioritizes Ghats conservation measures.",
-          "source_tag": "SAPCC Habitat"
-        },
-        "Water": {
-          "level": "Statewide concern",
-          "description": "Catchment variability and storage need for hydrological resilience.",
-          "evidence": "SAPCC water resource recommendations.",
-          "source_tag": "SAPCC Water"
-        }
-      }
-    },
-    "Dharbandora": {
-      "location": [15.322, 74.183],
-      "risks": {
-        "Forests_Biodiversity": {
-          "level": "Medium",
-          "description": "Mollem forests and corridor integrity need protection from linear projects.",
-          "evidence": "SAPCC highlights infrastructure risks to forest connectivity.",
-          "source_tag": "SAPCC Habitat"
-        },
-        "Agriculture": {
-          "level": "Statewide concern",
-          "description": "Rain-fed systems and plantations exposed to extremes.",
-          "evidence": "SAPCC agrarian notes on climate variability.",
-          "source_tag": "SAPCC Agriculture"
-        }
-      }
-    },
-    "Canacona": {
-      "location": [15.018, 74.023],
-      "risks": {
-        "Coastal": {
-          "level": "High",
-          "description": "Tourism beaches (Palolem/Agonda) face erosion, SLR and storm surge risk.",
-          "evidence": "Coastal taluka with high tourism-reliant communities.",
-          "source_tag": "SAPCC Coast"
-        },
-        "Health": {
-          "level": "Medium",
-          "description": "Post-flood water-borne disease risks and heat exposure.",
-          "evidence": "SAPCC health and extremes references.",
-          "source_tag": "SAPCC Health"
-        }
-      }
-    }
+    "lat": 15.183,
+    "lng": 73.985,
+    "Water": "Riverine flooding and saline ingress in wells",
+    "Agriculture": "Salinity impacts on paddy fields and horticulture",
+    "Forests & Biodiversity": "Loss of mangrove cover and species decline",
+    "Fisheries & Coastal": "Cyclone damage and coastal ecosystem stress",
+    "Health": "Increased malaria and dengue outbreaks",
+    "Infrastructure & Energy": "Port vulnerability and coastal highway flooding",
+    "Tourism": "Resort vulnerability due to beach loss"
+  },
+
+  "Bardez": {
+    "lat": 15.593,
+    "lng": 73.767,
+    "Water": "Groundwater depletion from over-extraction",
+    "Agriculture": "Reduced cashew productivity due to temperature rise",
+    "Forests & Biodiversity": "Shrinking green cover from urbanisation",
+    "Fisheries & Coastal": "Estuarine fisheries impacted by salinity",
+    "Health": "Heatwaves stressing elderly population",
+    "Tourism": "High vulnerability of coastal tourism hubs"
+  },
+  "Tiswadi": {
+    "lat": 15.495,
+    "lng": 73.832,
+    "Water": "High demand-supply gap in Panaji urban areas",
+    "Agriculture": "Decline in khazan paddy productivity",
+    "Forests & Biodiversity": "Mangrove degradation along Mandovi estuary",
+    "Fisheries & Coastal": "Fisheries affected by dredging and pollution",
+    "Health": "Urban flooding leading to water-borne diseases",
+    "Infrastructure & Energy": "Roads and bridges exposed to flooding"
+  },
+  "Bicholim": {
+    "lat": 15.593,
+    "lng": 73.943,
+    "Water": "Mining-affected water quality degradation",
+    "Agriculture": "Soil fertility loss in mining areas",
+    "Forests & Biodiversity": "Forest fragmentation due to mining",
+    "Fisheries & Coastal": "Limited inland fisheries stress",
+    "Health": "Respiratory issues from mining dust"
+  },
+  "Sattari": {
+    "lat": 15.531,
+    "lng": 74.045,
+    "Water": "Monsoon flash flood risk in Mhadei basin",
+    "Agriculture": "Shifts in cropping seasons due to rainfall variability",
+    "Forests & Biodiversity": "Western Ghats biodiversity under climate stress",
+    "Health": "Vector-borne disease hotspots in rural pockets"
+  },
+  "Pernem": {
+    "lat": 15.726,
+    "lng": 73.795,
+    "Water": "Coastal aquifer salinisation",
+    "Agriculture": "Declining coconut and cashew yields",
+    "Fisheries & Coastal": "Sand dune loss and coastal erosion",
+    "Tourism": "Beach tourism vulnerable to sea-level rise"
+  },
+
+  "Salcete": {
+    "lat": 15.27,
+    "lng": 73.96,
+    "Water": "Saline water ingress in wells",
+    "Agriculture": "Khazan agriculture facing flooding",
+    "Forests & Biodiversity": "Loss of mangrove belts",
+    "Fisheries & Coastal": "Impact of trawling and coastal storms",
+    "Health": "Increase in water-borne disease cases",
+    "Tourism": "Tourism hubs like Colva vulnerable to erosion"
+  },
+  "Mormugao": {
+    "lat": 15.389,
+    "lng": 73.815,
+    "Water": "Urban-industrial water stress",
+    "Agriculture": "Loss of cultivable land due to port expansion",
+    "Fisheries & Coastal": "Port-related pollution affecting fisheries",
+    "Health": "High respiratory ailments from coal dust",
+    "Infrastructure & Energy": "Vulnerability of port and airport to cyclones"
+  },
+  "Quepem": {
+    "lat": 15.212,
+    "lng": 74.077,
+    "Water": "River flooding during extreme rainfall",
+    "Agriculture": "Crop losses due to erratic rains",
+    "Forests & Biodiversity": "Forest degradation due to mining",
+    "Health": "Rural population vulnerable to climate stress"
+  },
+  "Canacona": {
+    "lat": 14.995,
+    "lng": 74.05,
+    "Water": "Coastal salinity intrusion",
+    "Agriculture": "Declining coconut productivity",
+    "Forests & Biodiversity": "Mangrove and turtle nesting habitat loss",
+    "Fisheries & Coastal": "Cyclone exposure along coastline",
+    "Tourism": "Beach tourism hubs at Palolem and Agonda vulnerable"
+  },
+  "Sanguem": {
+    "lat": 15.22,
+    "lng": 74.15,
+    "Water": "Reservoir-dependent water security stress",
+    "Agriculture": "Shifts in cropping due to rainfall variability",
+    "Forests & Biodiversity": "Loss of wildlife corridors in Ghats",
+    "Health": "Rural community vulnerability to vector-borne diseases"
+  },
+  "Dharbandora": {
+    "lat": 15.283,
+    "lng": 74.133,
+    "Water": "Flash floods in small catchments",
+    "Agriculture": "Low resilience of subsistence farming",
+    "Forests & Biodiversity": "Forest fragmentation and biodiversity loss",
+    "Health": "Remote communities highly climate vulnerable"
   }
 }
