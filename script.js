@@ -1,39 +1,39 @@
-// Initialize map
-var map = L.map("map").setView([15.4, 73.9], 9);
+// script.js
 
-// Add basemap
+// Initialize the map
+const map = L.map("map").setView([15.2993, 74.1240], 9);
+
+// Add OpenStreetMap tiles
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
-  attribution: "© OpenStreetMap contributors"
+  attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
-// Load risk data from external JSON
-fetch("/riskData.json")
-  .then(response => response.json())
-  .then(riskData => {
-    // Add markers for Goa districts
-    var northGoa = L.marker([15.6, 73.8]).addTo(map)
-      .bindPopup("North Goa – Click for Risks")
-      .on("click", () => showRiskDetails("North Goa", riskData));
-
-    var southGoa = L.marker([15.2, 74.0]).addTo(map)
-      .bindPopup("South Goa – Click for Risks")
-      .on("click", () => showRiskDetails("South Goa", riskData));
-
-    // Function to show risk details in bottom panel
-    function showRiskDetails(region, data) {
-      let risks = data[region];
-      if (!risks) {
-        document.getElementById("info-panel").innerHTML = `<h3>${region}</h3><p>No data available.</p>`;
-        return;
-      }
-
-      let details = `<h3>${region}</h3><ul>`;
-      for (let [key, value] of Object.entries(risks)) {
-        details += `<li><b>${key}:</b> ${value}</li>`;
-      }
-      details += "</ul>";
-      document.getElementById("info-panel").innerHTML = details;
+// Load risk data from /public/riskData.json
+fetch("riskData.json")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Failed to load riskData.json");
     }
+    return response.json();
   })
-  .catch(err => console.error("Error loading riskData.json:", err));
+  .then((data) => {
+    data.forEach((district) => {
+      const marker = L.marker([district.lat, district.lng]).addTo(map);
+
+      // Popup with district risks
+      marker.bindPopup(`
+        <div>
+          <h3>${district.name}</h3>
+          <ul>
+            ${district.risks
+              .map((risk) => `<li><strong>${risk.type}:</strong> ${risk.level}</li>`)
+              .join("")}
+          </ul>
+        </div>
+      `);
+    });
+  })
+  .catch((error) => {
+    console.error("Error loading risk data:", error);
+  });
