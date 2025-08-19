@@ -1,104 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
+  <title>Goa Climate Risk & Vulnerability Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Climate Risk & Vulnerability Dashboard</title>
-  
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <!-- Sidebar plugin CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-sidebar-v2/css/leaflet-sidebar.css" />
-
   <style>
-    body, html { margin:0; padding:0; height:100%; }
-    #map { height:100%; width:100%; }
-    .leaflet-sidebar { background: #f8f9fa; }
-    .sidebar-header { font-weight: bold; font-size: 16px; margin-bottom: 10px; }
-    .risk-item { margin-bottom: 8px; padding: 6px; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    body, html { margin: 0; height: 100%; font-family: Arial, sans-serif; }
+    #app { display: flex; flex-direction: column; height: 100%; }
+    #map { flex: 1; }
+    #sidebar {
+      position: absolute; top: 10px; left: 10px; width: 250px; 
+      background: rgba(255,255,255,0.95); padding: 10px;
+      border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      max-height: 80%; overflow-y: auto;
+    }
+    #matrix {
+      background: #fff; border-top: 2px solid #ccc; padding: 10px;
+      font-size: 14px; overflow-x: auto;
+    }
+    table { border-collapse: collapse; width: 100%; margin-top: 5px; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
+    th { background: #f0f0f0; }
+    h3 { margin: 8px 0; font-size: 16px; }
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <div id="sidebar" class="leaflet-sidebar collapsed">
-    <div class="leaflet-sidebar-tabs">
-      <ul role="tablist">
-        <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-      </ul>
+  <div id="app">
+    <div id="map"></div>
+    <div id="sidebar">
+      <h3>Goa Climate Risks</h3>
+      <b>🌊 Coastal & Marine</b><br>
+      • Coastal erosion (Candolim, Colva, Betul)<br>
+      • Sea-level rise → 14% land risk by 2050<br>
+      • Cyclones → Increasing intensity<br><br>
+      <b>🌡️ Climate & Health</b><br>
+      • Heat stress (>35°C days in Quepem, Sanguem)<br>
+      • Malaria/Dengue linked to flooding<br><br>
+      <b>🌳 Forests & Biodiversity</b><br>
+      • Mining/roads fragment Western Ghats<br>
+      • Wetland & mangrove pressure<br><br>
+      <b>🌆 Urban & Infrastructure</b><br>
+      • Urban flooding (Panaji, Margao, Mapusa)<br>
+      • Tourism: erosion + water scarcity<br>
     </div>
-    <div class="leaflet-sidebar-content">
-      <div class="leaflet-sidebar-pane" id="home">
-        <h1 class="sidebar-header">Goa Risk Indicators</h1>
-        <div class="risk-item">Coastal Erosion Risk Index: <b>High</b> (Candolim, Colva)</div>
-        <div class="risk-item">Cyclone Vulnerability Score: <b>Medium–High</b> (Fani, Tauktae)</div>
-        <div class="risk-item">Sea-Level Rise Impact Zone: <b>14% land area at risk by 2050</b></div>
-        <div class="risk-item">Heat Stress: Rising number of &gt;35°C days (Quepem, Sanguem)</div>
-        <div class="risk-item">Deforestation: Western Ghats mining & road projects</div>
-        <div class="risk-item">Urban Flooding Incidents (last 5 yrs): <b>Rising trend</b></div>
-      </div>
+    <div id="matrix">
+      <b>📊 District Risk Matrix (Dummy Data)</b>
+      <table>
+        <tr><th>District</th><th>Coastal</th><th>Heat</th><th>Flooding</th><th>Biodiversity</th></tr>
+        <tr><td>North Goa</td><td>High</td><td>Medium</td><td>High</td><td>Medium</td></tr>
+        <tr><td>South Goa</td><td>High</td><td>High</td><td>Medium</td><td>High</td></tr>
+      </table>
     </div>
   </div>
 
-  <!-- Map -->
-  <div id="map"></div>
-
-  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <!-- Sidebar plugin JS -->
-  <script src="https://unpkg.com/leaflet-sidebar-v2/js/leaflet-sidebar.js"></script>
-  <!-- FontAwesome for icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
   <script>
-    // Init map
-    var map = L.map('map').setView([15.5, 74], 8);
+    const map = L.map('map').setView([15.4, 73.8], 9);
 
-    // Base layers
-    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
     }).addTo(map);
 
-    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
-      'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles &copy; Esri'
-    });
-
-    // Goa polygon (rough box, dummy for now)
-    var goaBoundary = L.polygon([
-      [15.0, 73.6],
-      [15.0, 74.3],
-      [15.8, 74.3],
-      [15.8, 73.6]
-    ], {color: "red"}).addTo(map);
-
-    goaBoundary.bindPopup(`
-      <b>Goa - Risk Factors</b><br>
-      Coastal Erosion: High (Candolim, Colva)<br>
-      Cyclone Vulnerability: Medium–High<br>
-      Sea-Level Rise: 14% land area at risk by 2050<br>
-      Heat Stress: More &gt;35°C days<br>
-      Deforestation: Western Ghats corridor at risk<br>
-      Urban Flooding: Rising trend
-    `);
-
-    // Layer control
-    var baseMaps = {
-      "OpenStreetMap": osm,
-      "Satellite": satellite
-    };
-
-    L.control.layers(baseMaps, null, { collapsed: true }).addTo(map);
-
-    // Sidebar
-    var sidebar = L.control.sidebar({
-      autopan: true,
-      closeButton: true,
-      container: 'sidebar',
-      position: 'left'
-    }).addTo(map);
-
-    // Open sidebar by default
-    sidebar.open('home');
+    // Dummy hotspot markers
+    L.marker([15.52, 73.76]).addTo(map).bindPopup("Candolim: Coastal Erosion Risk");
+    L.marker([15.29, 73.96]).addTo(map).bindPopup("Quepem: Heat Stress Rising");
+    L.marker([15.49, 73.82]).addTo(map).bindPopup("Panaji: Urban Flooding Hotspot");
   </script>
 </body>
 </html>
