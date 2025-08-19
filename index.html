@@ -2,72 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Goa Climate Dashboard</title>
+  <title>Goa Climate Risks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Leaflet CSS & JS -->
+  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
   <style>
-    body, html { margin:0; padding:0; height:100%; font-family:sans-serif; }
-    #app { display:flex; height:100%; width:100%; }
-    #sidebar { width:250px; background:#f4f4f4; padding:10px; overflow-y:auto; }
-    #map { flex:1; }
-    #info-panel { margin-top:15px; font-size:14px; }
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Map container */
+    #map {
+      position: absolute;
+      top: 0;
+      left: 250px; /* leave room for side panel */
+      right: 0;
+      bottom: 150px; /* leave room for bottom panel */
+    }
+
+    /* Side panel */
+    #side-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 250px;
+      bottom: 0;
+      background: #f8f9fa;
+      padding: 10px;
+      overflow-y: auto;
+      border-right: 2px solid #ccc;
+    }
+
+    #side-panel h2 {
+      margin-top: 0;
+    }
+
+    /* Info panel */
+    #info-panel {
+      position: absolute;
+      bottom: 0;
+      left: 250px;
+      right: 0;
+      height: 150px;
+      background: #ffffff;
+      border-top: 2px solid #ccc;
+      padding: 10px;
+      overflow-y: auto;
+    }
   </style>
 </head>
 <body>
-  <div id="app">
-    <div id="sidebar">
-      <h2>Goa Climate Risks</h2>
-      <p>Click on a district marker to view risks</p>
-      <div id="info-panel"></div>
-    </div>
-    <div id="map"></div>
+  <!-- Side Panel -->
+  <div id="side-panel">
+    <h2>Goa Climate Risks</h2>
+    <p>Click on a district marker to view risks.</p>
   </div>
 
+  <!-- Map -->
+  <div id="map"></div>
+
+  <!-- Info Panel -->
+  <div id="info-panel">
+    <h3>District Info</h3>
+    <p>Select a marker on the map to view climate risks.</p>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     // Initialize map
-    var map = L.map("map").setView([15.4, 74.0], 9);
+    var map = L.map("map").setView([15.4, 73.9], 9);
+
+    // Add basemap
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap contributors"
+      maxZoom: 19,
+      attribution: "© OpenStreetMap contributors"
     }).addTo(map);
 
     // Load risk data
-    fetch("/riskData.json")
-      .then(res => {
-        if (!res.ok) throw new Error("riskData.json not found");
-        return res.json();
-      })
+    fetch("riskData.json")
+      .then(response => response.json())
       .then(riskData => {
-        // Markers
-        const northGoa = L.marker([15.6, 73.8]).addTo(map)
-          .bindPopup("North Goa")
+        // Add markers for Goa districts
+        var northGoa = L.marker([15.6, 73.8]).addTo(map)
+          .bindPopup("North Goa – Click for Risks")
           .on("click", () => showRiskDetails("North Goa", riskData));
 
-        const southGoa = L.marker([15.2, 74.0]).addTo(map)
-          .bindPopup("South Goa")
+        var southGoa = L.marker([15.2, 74.0]).addTo(map)
+          .bindPopup("South Goa – Click for Risks")
           .on("click", () => showRiskDetails("South Goa", riskData));
 
         function showRiskDetails(region, data) {
           let risks = data[region];
           if (!risks) {
-            document.getElementById("info-panel").innerHTML = `<b>${region}</b><br>No data available`;
+            document.getElementById("info-panel").innerHTML = 
+              `<h3>${region}</h3><p>No data available.</p>`;
             return;
           }
-          let details = `<h3>${region}</h3>`;
-          for (let [key, val] of Object.entries(risks)) {
-            details += `<p><b>${key}</b>: ${val}</p>`;
+
+          let details = `<h3>${region}</h3><ul>`;
+          for (let [key, value] of Object.entries(risks)) {
+            details += `<li><b>${key}:</b> ${value}</li>`;
           }
+          details += "</ul>";
           document.getElementById("info-panel").innerHTML = details;
         }
       })
-      .catch(err => {
-        document.getElementById("info-panel").innerHTML =
-          "<p style='color:red'>Error: " + err.message + "</p>";
-        console.error(err);
-      });
+      .catch(err => console.error("Error loading riskData.json:", err));
   </script>
 </body>
 </html>
