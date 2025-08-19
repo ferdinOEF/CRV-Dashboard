@@ -2,129 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Goa Climate Risk Dashboard</title>
-
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
   <style>
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: Arial, sans-serif;
       display: flex;
+      font-family: Arial, sans-serif;
     }
 
-    /* Left navigation panel */
-    #side-panel {
-      width: 220px;
-      background: #1b4332;
-      color: white;
+    #sidebar {
+      width: 300px;
+      background: #f8f9fa;
       padding: 15px;
-      box-sizing: border-box;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
       overflow-y: auto;
     }
-    #side-panel h2 {
-      font-size: 18px;
-      margin-top: 0;
-    }
-    #side-panel a {
-      display: block;
-      color: #d8f3dc;
-      text-decoration: none;
-      margin: 8px 0;
-    }
-    #side-panel a:hover {
-      color: #95d5b2;
-    }
 
-    /* Map container */
     #map {
       flex: 1;
-      height: 100%;
+      height: 100vh;
     }
 
-    /* Right info panel */
-    #info-panel {
-      width: 320px;
-      background: #ffffff;
-      border-left: 2px solid #ccc;
-      padding: 15px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
-    #info-panel h3 {
+    h2 {
       margin-top: 0;
+      font-size: 18px;
+    }
+
+    .risk-entry {
+      margin-bottom: 8px;
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
     }
   </style>
 </head>
 <body>
-
-  <!-- Left Nav -->
-  <div id="side-panel">
-    <h2>Goa Climate Risks</h2>
-    <a href="#">Overview</a>
-    <a href="#">Coastal Erosion</a>
-    <a href="#">Cyclone Risk</a>
-    <a href="#">Heat Stress</a>
-    <a href="#">Deforestation</a>
-    <a href="#">Urban Flooding</a>
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <h2>Risk Details</h2>
+    <div id="info-panel">Click a marker on the map to view risks.</div>
   </div>
 
   <!-- Map -->
   <div id="map"></div>
-
-  <!-- Right Info Panel -->
-  <div id="info-panel">
-    <h3>Click a marker to view risks</h3>
-    <p>This panel will show district-wise climate risk details.</p>
-  </div>
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
   <script>
     // Initialize map
-    var map = L.map("map").setView([15.4, 74.0], 9);
+    var map = L.map('map').setView([15.4, 73.9], 9);
 
-    // Add tile layer
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: "© OpenStreetMap"
-    }).addTo(map);
-
-    // Load risk data
-    fetch("riskData.json")
-      .then(response => response.json())
-      .then(riskData => {
-        // Add North Goa marker
-        L.marker([15.6, 73.8]).addTo(map)
-          .bindPopup("North Goa – Click for Risks")
-          .on("click", () => showRiskDetails("North Goa", riskData));
-
-        // Add South Goa marker
-        L.marker([15.2, 74.0]).addTo(map)
-          .bindPopup("South Goa – Click for Risks")
-          .on("click", () => showRiskDetails("South Goa", riskData));
-
-        function showRiskDetails(region, data) {
-          let risks = data[region];
-          if (!risks) {
-            document.getElementById("info-panel").innerHTML =
-              "<h3>" + region + "</h3><p>No data available.</p>";
-            return;
-          }
-          let details = `<h3>${region}</h3><ul>`;
-          for (let [key, value] of Object.entries(risks)) {
-            details += `<li><strong>${key}:</strong> ${value}</li>`;
-          }
-          details += "</ul>";
-          document.getElementById("info-panel").innerHTML = details;
-        }
-      })
-      .catch(err => console.error("Error loading riskData.json:", err));
-  </script>
-</body>
-</html>
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
