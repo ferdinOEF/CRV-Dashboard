@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize map
   const map = L.map("map").setView([15.4, 74], 9);
 
-  // Base layer
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors"
   }).addTo(map);
@@ -10,29 +8,35 @@ document.addEventListener("DOMContentLoaded", function () {
   let heatLayer;
   let climateData;
 
-  // Function to update sidebar
-  function showTalukaData(talukaName, data) {
-    const container = document.getElementById("talukaData");
-    container.innerHTML = `
-      <h3>${talukaName}</h3>
-      <ul>
-        ${Object.entries(data)
-          .filter(([k]) => k !== "lat" && k !== "lng" && k !== "riskScore")
-          .map(([k, v]) => `<li><strong>${k}:</strong> ${v}</li>`)
-          .join("")}
-      </ul>
-    `;
+  function getMarkerColor(score) {
+    if (score <= 0.6) return "#2ecc71";   // green
+    if (score <= 0.7) return "#f1c40f";   // yellow
+    if (score <= 0.75) return "#e67e22";  // orange
+    return "#e74c3c";                     // red
   }
 
-  // Load JSON data
+  function showTalukaData(talukaName, data) {
+    const container = document.getElementById("talukaData");
+    const selectedTheme = document.getElementById("themeFilter").value;
+
+    let html = `<h3>${talukaName}</h3><ul>`;
+    Object.entries(data).forEach(([key, value]) => {
+      if (["lat","lng","riskScore"].includes(key)) return;
+      if (selectedTheme === "All" || key === selectedTheme) {
+        html += `<li data-theme="${key}"><strong>${key}:</strong> ${value}</li>`;
+      }
+    });
+    html += "</ul>";
+    container.innerHTML = html;
+  }
+
   fetch("riskData.json")
     .then(res => res.json())
     .then(data => {
       climateData = data;
-
-      // Populate theme dropdown dynamically
       const first = Object.values(data)[0];
-      const themes = Object.keys(first).filter(k => !["lat", "lng", "riskScore"].includes(k));
+      const themes = Object.keys(first).filter(k => !["lat","lng","riskScore"].includes(k));
+
       const themeSelect = document.getElementById("themeFilter");
       themes.forEach(theme => {
         const opt = document.createElement("option");
@@ -41,31 +45,22 @@ document.addEventListener("DOMContentLoaded", function () {
         themeSelect.appendChild(opt);
       });
 
-      // Create markers
       Object.entries(data).forEach(([taluka, details]) => {
         if (!details.lat || !details.lng) return;
-        const marker = L.marker([details.lat, details.lng]).addTo(map);
-        marker.on("click", () => {
-          const selectedTheme = document.getElementById("themeFilter").value;
-          let filtered = {};
-          if (selectedTheme === "All") {
-            filtered = details;
-          } else {
-            filtered = {
-              [selectedTheme]: details[selectedTheme],
-              lat: details.lat,
-              lng: details.lng
-            };
-          }
-          showTalukaData(taluka, filtered);
-        });
+
+        const marker = L.circleMarker([details.lat, details.lng], {
+          radius: 8,
+          fillColor: getMarkerColor(details.riskScore),
+          color: "#fff",
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.9
+        }).addTo(map);
+
+        marker.on("click", () => showTalukaData(taluka, details));
       });
-    })
-    .catch(err => {
-      console.error("Error loading data:", err);
     });
 
-  // Heatmap toggle
   document.getElementById("toggleHeatmap").addEventListener("click", () => {
     if (!climateData) return;
     if (heatLayer) {
