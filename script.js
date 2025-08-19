@@ -1,317 +1,250 @@
-/* Goa Climate Risk Dashboard – script.js (Vercel public-aware)
-   - Expects /public/riskData.json available at /riskData.json
-   - Leaflet + leaflet.heat already loaded via CDN in index.html
-*/
+// script.js - Goa Climate Risk Dashboard
+// Expects /riskData.json to be available (put in /public/ on Vercel).
 
-// ---- Map init ----
-const map = L.map("map").setView([15.36, 74.02], 9);
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: "© OpenStreetMap contributors",
-}).addTo(map);
+document.addEventListener('DOMContentLoaded', () => {
+  const map = L.map('map').setView([15.36, 74.02], 9);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
-// ---- Globals ----
-const infoPanel = document.getElementById("info-content");
-let dataset = null;
-let talukaRows = [];
-let talukaMarkers = [];
-let heatLayer = null;
-let currentTheme = "All";
+  // DOM
+  const status = document.getElementById('status');
+  const infoContent = document.getElementById('info-content');
+  const themeSelect = document.getElementById('themeSelect');
+  const heatToggle = document.getElementById('heatToggle');
 
-// Fallback coords if JSON has only [location] or none
-const TALUKA_COORDS = {
-  // North Goa
-  "Pernem": [15.715, 73.795],
-  "Bardez": [15.553, 73.80],
-  "Tiswadi": [15.50, 73.83],
-  "Bicholim": [15.60, 73.95],
-  "Sattari": [15.55, 74.05],
-  "Ponda": [15.408, 74.014],
-  // South Goa
-  "Mormugao": [15.389, 73.815],
-  "Salcete": [15.30, 73.957],
-  "Quepem": [15.228, 74.070],
-  "Sanguem": [15.24, 74.165],
-  "Dharbandora": [15.322, 74.183],
-  "Canacona": [15.018, 74.023]
-};
+  let dataset = null;
+  let rows = [];              // flattened taluka rows
+  let markers = [];           // leaflet marker references
+  let heatLayer = null;
+  let currentTheme = 'All';
 
-// Risk level → numeric weight (for heatmap & sizing)
-function levelWeight(level = "") {
-  const L = String(level).toLowerCase();
-  if (L === "high") return 3;
-  if (L === "medium") return 2;
-  if (L === "low") return 1;
-  if (L.includes("state")) return 1.5; // "Statewide concern"
-  return 1;
-}
-
-// Color scale based on normalized score
-function riskColor(score) {
-  if (score >= 0.75) return "#c1121f"; // high
-  if (score >= 0.5)  return "#f28415"; // medium
-  if (score > 0)     return "#ffd166"; // low
-  return "#7cb342";                   // none
-}
-function normalize(val, min, max) {
-  if (max <= min) return 0;
-  const n = (val - min) / (max - min);
-  return Math.max(0, Math.min(1, n));
-}
-
-// Build Leaflet control (Theme filter + Heatmap toggle)
-(function mountControls(){
-  const ctrl = L.control({ position: "topright" });
-  ctrl.onAdd = function() {
-    const div = L.DomUtil.create("div", "panel-controls");
-    div.innerHTML = `
-      <div class="control-row">
-        <label class="lbl">Theme</label>
-        <select id="themeSelect"><option value="All" selected>All Themes</option></select>
-      </div>
-      <div class="control-row">
-        <label class="lbl">Heatmap</label>
-        <label class="switch">
-          <input type="checkbox" id="heatToggle" />
-          <span class="slider"></span>
-        </label>
-      </div>
-    `;
-    L.DomEvent.disableClickPropagation(div);
-    return div;
+  // fallback coords for talukas if JSON missing
+  const FALLBACK = {
+    "Pernem":[15.715,73.795],"Bardez":[15.553,73.80],"Tiswadi":[15.50,73.83],
+    "Bicholim":[15.60,73.95],"Sattari":[15.55,74.05],"Ponda":[15.408,74.014],
+    "Mormugao":[15.389,73.815],"Salcete":[15.30,73.957],"Quepem":[15.228,74.070],
+    "Sanguem":[15.24,74.165],"Dharbandora":[15.322,74.183],"Canacona":[15.018,74.023]
   };
-  ctrl.addTo(map);
-})();
 
-// Legend
-(function mountLegend() {
-  const legend = L.control({ position: "bottomright" });
-  legend.onAdd = function () {
-    const div = L.DomUtil.create("div", "legend");
-    div.innerHTML = `
-      <div class="legend-title">Risk Intensity</div>
-      <div class="legend-item"><span class="box" style="background:#c1121f;"></span>High</div>
-      <div class="legend-item"><span class="box" style="background:#f28415;"></span>Medium</div>
-      <div class="legend-item"><span class="box" style="background:#ffd166;"></span>Low</div>
-      <div class="legend-item"><span class="box" style="background:#7cb342;"></span>None</div>
-    `;
-    L.DomEvent.disableClickPropagation(div);
-    return div;
-  };
-  legend.addTo(map);
-})();
+  // Utilities
+  function logStatus(msg, isErr=false){
+    status.textContent = msg;
+    if(isErr) status.style.color = '#b00020';
+    else status.style.color = '';
+    console.log('STATUS:', msg);
+  }
+  function escapeHTML(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
 
-// ---- Data load (PUBLIC path) ----
-fetch("/riskData.json")
-  .then(r => {
-    if (!r.ok) throw new Error(`Failed to load /riskData.json (${r.status})`);
-    return r.json();
-  })
-  .then(json => {
-    dataset = json;
-    talukaRows = flattenTalukas(dataset);
-    hydrateThemeDropdown(collectThemes(talukaRows));
-    renderTalukas(); // initial view
-  })
-  .catch(err => {
-    console.error(err);
-    infoPanel.innerHTML = `<p style="color:#b00020">Error: unable to load risk data.</p>`;
-  });
+  // load dataset (absolute path)
+  async function loadData(){
+    try{
+      logStatus('Loading /riskData.json...');
+      const res = await fetch('/riskData.json', {cache: 'no-store'});
+      if(!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+      dataset = await res.json();
+      logStatus('Loaded riskData.json — parsing...');
+      rows = flatten(dataset);
+      populateThemes(rows);
+      render();
+      logStatus('Ready. Click a taluka marker.');
+    }catch(err){
+      console.error(err);
+      logStatus(`Failed to load /riskData.json — check /public/ and filename. (${err.message})`, true);
+      infoContent.innerHTML = `<div style="color:#b00020">Error loading data. Open DevTools Console for details. Also test: <a href="/riskData.json" target="_blank">/riskData.json</a></div>`;
+    }
+  }
 
-// ---- Helpers to shape data ----
-function flattenTalukas(data) {
-  const rows = [];
-  Object.entries(data).forEach(([district, talukas]) => {
-    Object.entries(talukas).forEach(([talukaName, obj]) => {
-      // Accept either obj.location [lat,lng] OR obj.lat/obj.lng OR fallback to static map
-      let lat, lng;
-      if (Array.isArray(obj.location) && obj.location.length === 2) {
-        [lat, lng] = obj.location;
-      } else if (typeof obj.lat === "number" && typeof obj.lng === "number") {
-        lat = obj.lat; lng = obj.lng;
-      } else if (TALUKA_COORDS[talukaName]) {
-        [lat, lng] = TALUKA_COORDS[talukaName];
-      } else {
-        return; // skip if no coordinates
-      }
+  function flatten(data){
+    const out = [];
+    Object.entries(data).forEach(([district, talukas])=>{
+      Object.entries(talukas).forEach(([talukaName, obj])=>{
+        let lat,lng;
+        if(Array.isArray(obj.location) && obj.location.length===2){ [lat,lng] = obj.location; }
+        else if(typeof obj.lat==='number' && typeof obj.lng==='number'){ lat = obj.lat; lng = obj.lng; }
+        else if(FALLBACK[talukaName]){ [lat,lng] = FALLBACK[talukaName]; }
+        else { console.warn('No coords for', talukaName); return; }
 
-      // risks can be under obj.risks (thematic object) OR obj.themes (string lists)
-      const risks = obj.risks || obj.themes || {};
-      rows.push({ district, taluka: talukaName, lat, lng, risks });
+        // risks stored under "risks" per our JSON convention
+        const risks = obj.risks || obj.themes || {};
+        out.push({ district, taluka: talukaName, lat, lng, risks });
+      });
     });
-  });
-  return rows;
-}
+    return out;
+  }
 
-function collectThemes(rows) {
-  const set = new Set();
-  rows.forEach(r => {
-    Object.keys(r.risks || {}).forEach(theme => set.add(theme));
-  });
-  return Array.from(set).sort();
-}
+  function collectThemes(rows){
+    const s = new Set();
+    rows.forEach(r => Object.keys(r.risks || {}).forEach(t => s.add(t)));
+    return Array.from(s).sort();
+  }
 
-function hydrateThemeDropdown(themes) {
-  const sel = document.getElementById("themeSelect");
-  themes.forEach(t => {
-    const opt = document.createElement("option");
-    opt.value = t;
-    opt.textContent = t.replaceAll("_", " & ");
-    sel.appendChild(opt);
-  });
-}
+  function populateThemes(rows){
+    const themes = collectThemes(rows);
+    // clear existing except All
+    themeSelect.innerHTML = '<option value="All">All Themes</option>';
+    themes.forEach(t => {
+      const opt = document.createElement('option'); opt.value = t; opt.textContent = t.replaceAll('_',' & ');
+      themeSelect.appendChild(opt);
+    });
+  }
 
-// ---- Rendering ----
-function clearMarkers() {
-  talukaMarkers.forEach(m => map.removeLayer(m));
-  talukaMarkers = [];
-}
-function removeHeat() {
-  if (heatLayer) { map.removeLayer(heatLayer); heatLayer = null; }
-}
-
-function talukaIntensity(risks, theme) {
-  if (!risks) return 0;
-  // Two possible shapes:
-  // 1) risks[theme] = { level, description, ... }
-  // 2) risks[theme] = [ "risk item", ... ]  (older list format)
-  if (theme === "All") {
-    return Object.values(risks).reduce((sum, v) => {
-      if (Array.isArray(v)) return sum + (v.length || 0);
-      if (v && typeof v === "object") return sum + levelWeight(v.level);
+  // compute intensity score for taluka (for heat/marker size)
+  function talukaScore(risks, theme){
+    // risks can be either object of themes where each theme is object with "level" or array of strings
+    if(!risks) return 0;
+    if(theme && theme !== 'All'){
+      const v = risks[theme];
+      if(!v) return 0;
+      if(Array.isArray(v)) return v.length;
+      if(typeof v === 'object') return levelWeight(v.level || 'Statewide concern');
+      return 0;
+    }
+    // All themes => sum weights
+    return Object.values(risks).reduce((sum,v)=>{
+      if(Array.isArray(v)) return sum + v.length;
+      if(typeof v==='object') return sum + levelWeight(v.level);
       return sum;
-    }, 0);
-  } else {
-    const v = risks[theme];
-    if (Array.isArray(v)) return v.length || 0;
-    if (v && typeof v === "object") return levelWeight(v.level);
-    return 0;
+    },0);
   }
-}
 
-function renderTalukas() {
-  if (!talukaRows.length) return;
+  function levelWeight(level){
+    if(!level) return 1;
+    const l = String(level).toLowerCase();
+    if(l==='high') return 3;
+    if(l==='medium') return 2;
+    if(l==='low') return 1;
+    if(l.includes('state')) return 1.5;
+    return 1;
+  }
 
-  clearMarkers();
-  removeHeat();
+  function render(){
+    // clear markers & heat
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+    if(heatLayer){ map.removeLayer(heatLayer); heatLayer = null; }
 
-  // Compute intensities
-  const intensities = talukaRows.map(r => talukaIntensity(r.risks, currentTheme));
-  const min = Math.min(...intensities);
-  const max = Math.max(...intensities);
+    // intensities
+    const vals = rows.map(r => talukaScore(r.risks, currentTheme));
+    const min = Math.min(...vals); const max = Math.max(...vals);
 
-  // Markers
-  talukaRows.forEach((r, idx) => {
-    const raw = intensities[idx];
-    const score = normalize(raw, min, max);
-    const color = riskColor(score);
+    // create markers and heatpoints
+    const heatPoints = [];
+    rows.forEach((r, idx)=>{
+      const raw = vals[idx] || 0;
+      const score = normalize(raw, min, max);
+      const color = scoreColor(score);
 
-    const marker = L.circleMarker([r.lat, r.lng], {
-      radius: 10 + Math.round(score * 8),
-      color: "#333",
-      weight: 1,
-      fillColor: color,
-      fillOpacity: 0.9,
-    }).addTo(map);
+      // create marker
+      const marker = L.circleMarker([r.lat, r.lng], {
+        radius: 8 + Math.round(score*8),
+        color: '#222',
+        weight: 1,
+        fillColor: color,
+        fillOpacity: 0.9
+      }).addTo(map);
 
-    marker.bindPopup(`<strong>${r.taluka}</strong><br/><small>${r.district}</small>`);
-    marker.on("click", () => renderInfoPanel(r, currentTheme));
+      marker.bindPopup(`<strong>${escapeHTML(r.taluka)}</strong><br/><small>${escapeHTML(r.district)}</small>`);
+      marker.on('click', ()=> { renderInfo(r); });
 
-    talukaMarkers.push(marker);
-  });
-
-  // Heatmap
-  const heatEnabled = document.getElementById("heatToggle").checked;
-  if (heatEnabled && typeof L.heatLayer === "function") {
-    const heatData = talukaRows.map((r, idx) => {
-      const s = normalize(intensities[idx], min, max);
-      return [r.lat, r.lng, s || 0.0001];
+      markers.push(marker);
+      heatPoints.push([r.lat, r.lng, score || 0.0001]);
     });
-    heatLayer = L.heatLayer(heatData, { radius: 28, blur: 16, maxZoom: 12 }).addTo(map);
-  }
-}
 
-// Panel
-function renderInfoPanel(row, theme) {
-  const { taluka, district, risks } = row;
-  let html = `<h2>${escapeHTML(taluka)} <span class="muted">(${escapeHTML(district)})</span></h2>`;
-
-  const entries = Object.entries(risks || {});
-  if (!entries.length) {
-    infoPanel.innerHTML = html + `<div class="muted">No risks listed.</div>`;
-    return;
+    // heat
+    if(heatToggle.checked && typeof L.heatLayer === 'function'){
+      heatLayer = L.heatLayer(heatPoints, { radius: 28, blur: 18, maxZoom: 12 }).addTo(map);
+    }
   }
 
-  if (theme !== "All") {
-    html += accordionBlock(theme, risks[theme]);
-  } else {
-    entries.forEach(([th, obj]) => { html += accordionBlock(th, obj); });
+  function normalize(v, min, max){
+    if(max===min) return (max===0?0:1);
+    return Math.max(0, Math.min(1, (v-min)/(max-min)));
   }
 
-  infoPanel.innerHTML = html;
-  wireAccordions();
-}
-
-// One accordion for a theme
-function accordionBlock(themeKey, value) {
-  const id = `acc-${Math.random().toString(36).slice(2, 9)}`;
-  const title = themeKey.replaceAll("_", " & ");
-
-  // Support both shapes
-  let itemsHTML = "";
-  let badge = "";
-  if (Array.isArray(value)) {
-    itemsHTML = value.map(x => `<li>${escapeHTML(x)}</li>`).join("") || `<li class="muted">No listed risks</li>`;
-  } else if (value && typeof value === "object") {
-    const lvl = (value.level || "").toLowerCase();
-    const badgeClass = lvl === "high" ? "high" : (lvl === "medium" ? "medium" : (lvl === "low" ? "low" : "state"));
-    badge = value.level ? ` <span class="badge ${badgeClass}">${escapeHTML(value.level)}</span>` : "";
-    const desc = value.description ? `<li>${escapeHTML(value.description)}</li>` : "";
-    const ev   = value.evidence ? `<li><em>${escapeHTML(value.evidence)}</em></li>` : "";
-    const src  = value.source_tag ? `<li class="muted">Source: ${escapeHTML(value.source_tag)}</li>` : "";
-    itemsHTML = desc + ev + src || `<li class="muted">No details</li>`;
-  } else {
-    itemsHTML = `<li class="muted">No details</li>`;
+  function scoreColor(s){
+    if(s >= 0.75) return '#c1121f';
+    if(s >= 0.5) return '#f28415';
+    if(s > 0) return '#ffd166';
+    return '#7cb342';
   }
 
-  return `
-    <div class="accordion">
-      <div class="accordion-header" data-target="${id}">
-        <span>${escapeHTML(title)}${badge}</span>
-        <span class="toggle">+</span>
+  function renderInfo(row){
+    const { taluka, district, risks } = row;
+    let html = `<h2>${escapeHTML(taluka)}</h2><div class="muted">${escapeHTML(district)}</div>`;
+
+    if(!risks || Object.keys(risks).length===0){
+      html += `<div class="muted">No thematic risks listed.</div>`;
+      infoContent.innerHTML = html; return;
+    }
+
+    // If theme filter selected, show only that
+    if(currentTheme !== 'All'){
+      html += accordionBlock(currentTheme, risks[currentTheme]);
+    } else {
+      Object.entries(risks).forEach(([themeKey, value]) => { html += accordionBlock(themeKey, value); });
+    }
+    infoContent.innerHTML = html;
+    wireAccordions();
+  }
+
+  function accordionBlock(title, value){
+    const id = 'acc-' + Math.random().toString(36).slice(2,9);
+    const displayTitle = escapeHTML(title.replaceAll('_',' & '));
+    let badge = '';
+    let listHtml = '';
+
+    // value could be array or object
+    if(Array.isArray(value)){
+      listHtml = value.map(v => `<li>${escapeHTML(v)}</li>`).join('');
+    } else if(value && typeof value === 'object'){
+      const lvl = (value.level || '').toLowerCase();
+      const cls = lvl==='high' ? 'high' : (lvl==='medium' ? 'medium' : (lvl==='low' ? 'low' : 'state'));
+      badge = value.level ? `<span class="badge ${cls}">${escapeHTML(value.level)}</span>` : '';
+      if(value.description) listHtml += `<li>${escapeHTML(value.description)}</li>`;
+      if(value.evidence) listHtml += `<li style="font-style:italic;color:#475569">${escapeHTML(value.evidence)}</li>`;
+      if(value.source_tag) listHtml += `<li class="muted">Source: ${escapeHTML(value.source_tag)}</li>`;
+    } else {
+      listHtml = `<li class="muted">No details</li>`;
+    }
+
+    return `
+      <div class="accordion">
+        <div class="accordion-header" data-target="${id}">
+          <span>${displayTitle}${badge}</span>
+          <span class="toggle">+</span>
+        </div>
+        <div id="${id}" class="accordion-content"><ul class="risk-list">${listHtml}</ul></div>
       </div>
-      <div id="${id}" class="accordion-content">
-        <ul class="risk-list">${itemsHTML}</ul>
-      </div>
-    </div>
-  `;
-}
+    `;
+  }
 
-function wireAccordions() {
-  document.querySelectorAll(".accordion-header").forEach(h => {
-    h.addEventListener("click", () => {
-      const id = h.getAttribute("data-target");
-      const content = document.getElementById(id);
-      const toggle = h.querySelector(".toggle");
-      const open = content.style.display === "block";
-      content.style.display = open ? "none" : "block";
-      toggle.textContent = open ? "+" : "–";
+  function wireAccordions(){
+    document.querySelectorAll('.accordion-header').forEach(h=>{
+      h.addEventListener('click', ()=>{
+        const id = h.getAttribute('data-target');
+        const content = document.getElementById(id);
+        const toggle = h.querySelector('.toggle');
+        if(content.style.display === 'block'){ content.style.display = 'none'; toggle.textContent = '+'; }
+        else { content.style.display = 'block'; toggle.textContent = '–'; }
+      });
     });
-  });
-}
-
-function escapeHTML(s) {
-  return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
-}
-
-// ---- Events ----
-document.addEventListener("change", (e) => {
-  if (e.target.id === "themeSelect") {
-    currentTheme = e.target.value;
-    renderTalukas();
-    infoPanel.innerHTML = `<div class="muted">Select a taluka marker to view "${currentTheme}" risks.</div>`;
   }
-  if (e.target.id === "heatToggle") {
-    renderTalukas();
+
+  // events
+  themeSelect.addEventListener('change', (e) => { currentTheme = e.target.value; render(); infoContent.innerHTML = `<div class="muted">Select a taluka marker to view "${currentTheme}" risks.</div>`; });
+  heatToggle.addEventListener('change', () => { render(); });
+
+  // small helper to list themes in panel
+  function listUniqueThemes(rows){
+    return collectThemes(rows);
+    function collectThemes(rs){
+      const s = new Set();
+      rs.forEach(r => Object.keys(r.risks || {}).forEach(t => s.add(t)));
+      return Array.from(s).sort();
+    }
   }
+
+  // load
+  loadData();
 });
