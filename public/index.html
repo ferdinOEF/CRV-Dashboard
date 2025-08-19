@@ -2,17 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Goa Climate Risks</title>
-  <link rel="stylesheet" href="style.css">
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-  <!-- Heatmap Plugin CSS -->
-  <style>
-    #map {
-      height: 600px;
-      width: 100%;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <h1>Goa Climate Risks</h1>
@@ -23,21 +17,16 @@
     <select id="themeFilter">
       <option value="All">All Themes</option>
     </select>
-    <button id="heatmapToggle">Show Heatmap</button>
+    <label><input type="checkbox" id="heatmapToggle"> Show heatmap</label>
   </div>
 
   <div id="map"></div>
 
-  <div id="infoPanel">
-    <h2 id="talukaName">Select a taluka</h2>
-    <div id="themeData"></div>
-  </div>
-
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <!-- Heatmap Plugin -->
+  <!-- Heatmap plugin -->
   <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
-  <!-- App Script -->
+  <!-- Our script -->
   <script src="script.js"></script>
 </body>
 </html>
