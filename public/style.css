@@ -1,46 +1,82 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   background: #eef2f5;
   color: #333;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
-h1 {
-  margin: 10px 0;
+header {
+  background: #1a5276;
+  color: #fff;
+  padding: 15px;
   text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  margin: 0;
   font-size: 1.8rem;
-  color: #1a5276;
 }
-
-p {
-  text-align: center;
-  margin: 5px 0;
-}
-
-#controls {
-  text-align: center;
-  margin: 10px;
+header p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
 }
 
 #map {
-  flex: 1;
   height: 70vh;
   width: 100%;
-  margin: auto;
-  border: 2px solid #ccc;
-  border-radius: 8px;
 }
 
+/* Controls overlay */
+#controls {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.9rem;
+  z-index: 1000;
+}
+
+/* Legend overlay */
+#legend {
+  position: absolute;
+  bottom: 30px;
+  left: 10px;
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  z-index: 1000;
+}
+#legend h4 {
+  margin: 0 0 5px;
+  font-size: 0.9rem;
+  color: #2c3e50;
+}
+#legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+/* Sidebar */
 #talukaData {
-  padding: 15px;
+  padding: 20px;
   background: #fff;
   border-top: 2px solid #ccc;
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
-  text-align: left;
-  min-height: 120px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  min-height: 150px;
 }
 
 #talukaData h3 {
@@ -54,18 +90,28 @@ p {
 }
 
 #talukaData li {
-  margin-bottom: 6px;
-  padding: 6px 10px;
-  background: #f4f6f7;
-  border-radius: 4px;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 6px;
+  background: #f9f9f9;
+  border-left: 4px solid #3498db;
 }
 
-/* Mobile responsive */
+/* Theme-specific colors */
+li[data-theme="Water"] { border-left-color: #3498db; }
+li[data-theme="Agriculture"] { border-left-color: #27ae60; }
+li[data-theme="Forests & Biodiversity"] { border-left-color: #145a32; }
+li[data-theme="Fisheries & Coastal"] { border-left-color: #16a085; }
+li[data-theme="Health"] { border-left-color: #c0392b; }
+li[data-theme="Infrastructure & Energy"] { border-left-color: #e67e22; }
+li[data-theme="Tourism"] { border-left-color: #8e44ad; }
+
 @media (max-width: 768px) {
   #map {
     height: 60vh;
   }
-  #talukaData {
-    font-size: 0.9rem;
+  #controls {
+    flex-direction: column;
+    gap: 6px;
   }
 }
