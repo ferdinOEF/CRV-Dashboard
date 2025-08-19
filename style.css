@@ -1,66 +1,44 @@
-/* Layout */
-:root {
-  --panel-width: 360px;
-  --muted: #6b7280;
-  --bg: #f8fafc;
-}
-html,body,#app { height: 100%; margin: 0; }
-body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
-
-#app {
-  display: grid;
-  grid-template-columns: 1fr var(--panel-width);
-  grid-template-rows: 100vh;
-  height: 100vh;
-  overflow: hidden;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* Map column */
+h1 {
+  text-align: center;
+  margin: 10px 0;
+}
+
+p {
+  text-align: center;
+}
+
+.controls {
+  text-align: center;
+  margin: 10px 0;
+}
+
 #map {
+  height: 600px;
   width: 100%;
-  height: 100vh; /* required for Leaflet to render */
+  margin-bottom: 10px;
 }
 
-/* Side panel */
-#panel {
-  background: var(--bg);
-  border-left: 1px solid #e6eef6;
-  padding: 16px;
-  box-sizing: border-box;
-  overflow-y: auto;
+#infoPanel {
+  padding: 15px;
+  background: #f9f9f9;
+  border-top: 1px solid #ccc;
 }
 
-#panel h1 {
-  margin: 0 0 6px 0;
-  font-size: 20px;
-  color: #0f172a;
-}
-.muted { color: var(--muted); font-size: 13px; }
-
-/* Controls */
-.controls { margin: 10px 0 14px 0; display:flex; flex-direction: column; gap:8px; }
-.controls label { font-size: 13px; color: #334155; }
-#themeSelect {
-  padding: 8px; border-radius: 6px; border: 1px solid #e6eef6;
+#infoPanel h2 {
+  margin-top: 0;
 }
 
-/* Heat toggle */
-.heat-row { display:flex; align-items:center; gap:8px; font-size:13px; color:#334155; }
-
-/* Info */
-#info-content { margin-top: 10px; }
-
-/* Accordions */
-.accordion { border: 1px solid #e6eef6; border-radius: 8px; margin-bottom: 10px; background:#fff; overflow:hidden; }
-.accordion-header {
-  padding: 10px 12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;
-  background:#f3f6fb; user-select:none;
+.theme-section {
+  margin-bottom: 15px;
 }
-.accordion-content { padding: 8px 12px 12px 12px; display:none; }
-.risk-list { margin: 0; padding-left: 18px; }
-.risk-list li { margin: 6px 0; line-height: 1.4; }
-.badge { padding: 3px 8px; border-radius: 999px; color: #fff; font-size: 12px; margin-left:8px; }
-.badge.high { background:#c1121f; } .badge.medium { background:#f28415; } .badge.low { background:#7cb342; } .badge.state { background:#64748b; }
 
-/* Legend (Leaflet control will inherit) */
-.legend { font-size:12px; }
+.theme-section h3 {
+  margin: 5px 0;
+  color: #2c3e50;
+}
