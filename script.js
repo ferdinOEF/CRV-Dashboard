@@ -1,103 +1,44 @@
-let currentMode = "taluka"; // taluka | theme
-let currentTheme = "All";
-let markers = [];
+// Initialize the map
+var map = L.map("map").setView([15.4, 74.0], 9);
 
-// Load data
-fetch('riskData.json')
-  .then(res => res.json())
-  .then(data => {
+// Add OpenStreetMap base layer
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "&copy; OpenStreetMap contributors",
+}).addTo(map);
 
-    function clearMarkers() {
-      markers.forEach(m => map.removeLayer(m));
-      markers = [];
-    }
+// Load risk data
+fetch("riskData.json")
+  .then((response) => response.json())
+  .then((riskData) => {
+    // Add markers for districts
+    var northGoa = L.marker([15.6, 73.8]).addTo(map)
+      .bindPopup("North Goa – Click for Risks")
+      .on("click", () => showRiskDetails("North Goa", riskData));
 
-    // Render by Taluka (default)
-    function renderByTaluka(theme) {
-      clearMarkers();
-      data.talukas.forEach(t => {
-        const marker = L.marker([t.lat, t.lng]).addTo(map);
+    var southGoa = L.marker([15.2, 74.0]).addTo(map)
+      .bindPopup("South Goa – Click for Risks")
+      .on("click", () => showRiskDetails("South Goa", riskData));
 
-        let popupContent = `<h3>${t.name}</h3>`;
-        if (theme === "All") {
-          for (const [th, risks] of Object.entries(t.themes)) {
-            popupContent += `<strong>${th}</strong><ul>`;
-            risks.forEach(r => popupContent += `<li>${r}</li>`);
-            popupContent += `</ul>`;
-          }
-        } else if (t.themes[theme]) {
-          popupContent += `<strong>${theme}</strong><ul>`;
-          t.themes[theme].forEach(r => popupContent += `<li>${r}</li>`);
-          popupContent += `</ul>`;
+    // Function to expand hierarchical data
+    function formatRisks(obj, level = 0) {
+      let html = "<ul>";
+      for (let [key, value] of Object.entries(obj)) {
+        if (typeof value === "object") {
+          html += `<li><b>${key}</b>${formatRisks(value, level + 1)}</li>`;
         } else {
-          popupContent += `<em>No data for ${theme}</em>`;
+          html += `<li>${key}: ${value}</li>`;
         }
-
-        marker.bindPopup(popupContent);
-        markers.push(marker);
-      });
+      }
+      html += "</ul>";
+      return html;
     }
 
-    // Render by Theme (inverse view)
-    function renderByTheme(theme) {
-      clearMarkers();
-      if (theme === "All") {
-        alert("Please select a specific theme to view geographic spread.");
-        return;
-      }
-
-      data.talukas.forEach(t => {
-        if (t.themes[theme]) {
-          const marker = L.marker([t.lat, t.lng]).addTo(map);
-          let popupContent = `<h3>${t.name}</h3><strong>${theme}</strong><ul>`;
-          t.themes[theme].forEach(r => popupContent += `<li>${r}</li>`);
-          popupContent += `</ul>`;
-          marker.bindPopup(popupContent);
-          markers.push(marker);
-        }
-      });
+    // Show details in side panel
+    function showRiskDetails(region, data) {
+      let risks = data[region];
+      let details = `<h2>${region}</h2>`;
+      details += formatRisks(risks);
+      document.getElementById("info-panel").innerHTML = details;
     }
-
-    // Initial render
-    renderByTaluka("All");
-
-    // Controls
-    const controls = L.control({position: 'topright'});
-    controls.onAdd = function() {
-      const div = L.DomUtil.create('div', 'view-controls');
-      div.innerHTML = `
-        <div>
-          <label>Mode:</label>
-          <select id="modeSelect">
-            <option value="taluka">By Taluka</option>
-            <option value="theme">By Theme</option>
-          </select>
-        </div>
-        <div>
-          <label>Theme:</label>
-          <select id="themeSelect">
-            <option value="All">All</option>
-            ${data.themes.map(th => `<option value="${th}">${th}</option>`).join('')}
-          </select>
-        </div>
-      `;
-      return div;
-    };
-    controls.addTo(map);
-
-    // Event listeners
-    document.addEventListener('change', e => {
-      if (e.target.id === "modeSelect") {
-        currentMode = e.target.value;
-      }
-      if (e.target.id === "themeSelect") {
-        currentTheme = e.target.value;
-      }
-
-      if (currentMode === "taluka") {
-        renderByTaluka(currentTheme);
-      } else {
-        renderByTheme(currentTheme);
-      }
-    });
-  });
+  })
+  .catch((err) => console.error("Error loading riskData.json:", err));
