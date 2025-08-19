@@ -4,11 +4,12 @@
     "lng": 73.912,
     "Water": "Saline intrusion and reduced freshwater availability",
     "Agriculture": "Crop stress from erratic rainfall and temperature rise",
-    "Forests & Biodiversity": "Habitat fragmentation and increased fire risk",
+    "Forests & Biodiversity": "Habitat fragmentation and fire risk in Western Ghats",
     "Fisheries & Coastal": "Shoreline erosion and estuarine salinity shifts",
     "Health": "Heat-related illnesses and vector-borne diseases",
-    "Infrastructure & Energy": "Urban flooding and grid disruptions",
-    "Tourism": "Beach erosion and stress on water resources"
+    "Infrastructure & Energy": "Urban flooding and power disruptions",
+    "Tourism": "Beach erosion affecting tourism hubs",
+    "riskScore": 0.8
   },
   "South Goa": {
     "lat": 15.183,
@@ -17,11 +18,11 @@
     "Agriculture": "Salinity impacts on paddy fields and horticulture",
     "Forests & Biodiversity": "Loss of mangrove cover and species decline",
     "Fisheries & Coastal": "Cyclone damage and coastal ecosystem stress",
-    "Health": "Increased malaria and dengue outbreaks",
+    "Health": "Malaria and dengue outbreaks",
     "Infrastructure & Energy": "Port vulnerability and coastal highway flooding",
-    "Tourism": "Resort vulnerability due to beach loss"
+    "Tourism": "Resort vulnerability due to beach loss",
+    "riskScore": 0.7
   },
-
   "Bardez": {
     "lat": 15.593,
     "lng": 73.767,
@@ -30,7 +31,9 @@
     "Forests & Biodiversity": "Shrinking green cover from urbanisation",
     "Fisheries & Coastal": "Estuarine fisheries impacted by salinity",
     "Health": "Heatwaves stressing elderly population",
-    "Tourism": "High vulnerability of coastal tourism hubs"
+    "Infrastructure & Energy": "Flood risks to settlement clusters",
+    "Tourism": "High vulnerability of coastal tourism hubs like Calangute",
+    "riskScore": 0.65
   },
   "Tiswadi": {
     "lat": 15.495,
@@ -38,9 +41,11 @@
     "Water": "High demand-supply gap in Panaji urban areas",
     "Agriculture": "Decline in khazan paddy productivity",
     "Forests & Biodiversity": "Mangrove degradation along Mandovi estuary",
-    "Fisheries & Coastal": "Fisheries affected by dredging and pollution",
+    "Fisheries & Coastal": "Dredging and pollution affecting fisheries",
     "Health": "Urban flooding leading to water-borne diseases",
-    "Infrastructure & Energy": "Roads and bridges exposed to flooding"
+    "Infrastructure & Energy": "Roads and bridges exposed to flooding",
+    "Tourism": "Tourism hubs like Miramar vulnerable to storm surge",
+    "riskScore": 0.6
   },
   "Bicholim": {
     "lat": 15.593,
@@ -49,7 +54,10 @@
     "Agriculture": "Soil fertility loss in mining areas",
     "Forests & Biodiversity": "Forest fragmentation due to mining",
     "Fisheries & Coastal": "Limited inland fisheries stress",
-    "Health": "Respiratory issues from mining dust"
+    "Health": "Respiratory issues from mining dust",
+    "Infrastructure & Energy": "Flooding of mining pits and nearby villages",
+    "Tourism": "Decline in eco-tourism potential from degraded landscapes",
+    "riskScore": 0.55
   },
   "Sattari": {
     "lat": 15.531,
@@ -57,35 +65,47 @@
     "Water": "Monsoon flash flood risk in Mhadei basin",
     "Agriculture": "Shifts in cropping seasons due to rainfall variability",
     "Forests & Biodiversity": "Western Ghats biodiversity under climate stress",
-    "Health": "Vector-borne disease hotspots in rural pockets"
+    "Fisheries & Coastal": "Stream fisheries stressed by flow changes",
+    "Health": "Vector-borne disease hotspots in rural pockets",
+    "Infrastructure & Energy": "Damage to rural road networks during floods",
+    "Tourism": "Wildlife tourism vulnerable to forest fires and floods",
+    "riskScore": 0.7
   },
   "Pernem": {
     "lat": 15.726,
     "lng": 73.795,
     "Water": "Coastal aquifer salinisation",
     "Agriculture": "Declining coconut and cashew yields",
-    "Fisheries & Coastal": "Sand dune loss and coastal erosion",
-    "Tourism": "Beach tourism vulnerable to sea-level rise"
+    "Forests & Biodiversity": "Sand dune ecosystem degradation",
+    "Fisheries & Coastal": "Coastal erosion and loss of turtle nesting sites",
+    "Health": "Seasonal water scarcity affecting communities",
+    "Infrastructure & Energy": "Low-lying roads vulnerable to flooding",
+    "Tourism": "Beach tourism vulnerable to sea-level rise",
+    "riskScore": 0.68
   },
-
   "Salcete": {
     "lat": 15.27,
     "lng": 73.96,
     "Water": "Saline water ingress in wells",
-    "Agriculture": "Khazan agriculture facing flooding",
-    "Forests & Biodiversity": "Loss of mangrove belts",
+    "Agriculture": "Khazan agriculture facing flooding stress",
+    "Forests & Biodiversity": "Loss of mangrove belts and wetlands",
     "Fisheries & Coastal": "Impact of trawling and coastal storms",
     "Health": "Increase in water-borne disease cases",
-    "Tourism": "Tourism hubs like Colva vulnerable to erosion"
+    "Infrastructure & Energy": "Flooding of Margao low-lying areas",
+    "Tourism": "Tourism hubs like Colva vulnerable to erosion",
+    "riskScore": 0.75
   },
   "Mormugao": {
     "lat": 15.389,
     "lng": 73.815,
     "Water": "Urban-industrial water stress",
     "Agriculture": "Loss of cultivable land due to port expansion",
+    "Forests & Biodiversity": "Urban green cover decline",
     "Fisheries & Coastal": "Port-related pollution affecting fisheries",
     "Health": "High respiratory ailments from coal dust",
-    "Infrastructure & Energy": "Vulnerability of port and airport to cyclones"
+    "Infrastructure & Energy": "Vulnerability of port and airport to cyclones",
+    "Tourism": "Industrial-tourism conflict zones",
+    "riskScore": 0.72
   },
   "Quepem": {
     "lat": 15.212,
@@ -93,7 +113,11 @@
     "Water": "River flooding during extreme rainfall",
     "Agriculture": "Crop losses due to erratic rains",
     "Forests & Biodiversity": "Forest degradation due to mining",
-    "Health": "Rural population vulnerable to climate stress"
+    "Fisheries & Coastal": "Riverine fisheries stress",
+    "Health": "Rural population vulnerable to climate stress",
+    "Infrastructure & Energy": "Vulnerability of village roads to floods",
+    "Tourism": "Decline in nature-based tourism",
+    "riskScore": 0.6
   },
   "Canacona": {
     "lat": 14.995,
@@ -102,7 +126,10 @@
     "Agriculture": "Declining coconut productivity",
     "Forests & Biodiversity": "Mangrove and turtle nesting habitat loss",
     "Fisheries & Coastal": "Cyclone exposure along coastline",
-    "Tourism": "Beach tourism hubs at Palolem and Agonda vulnerable"
+    "Health": "High vulnerability to post-cyclone outbreaks",
+    "Infrastructure & Energy": "Damage to coastal roads from storms",
+    "Tourism": "Beach tourism hubs like Palolem and Agonda at risk",
+    "riskScore": 0.7
   },
   "Sanguem": {
     "lat": 15.22,
@@ -110,7 +137,11 @@
     "Water": "Reservoir-dependent water security stress",
     "Agriculture": "Shifts in cropping due to rainfall variability",
     "Forests & Biodiversity": "Loss of wildlife corridors in Ghats",
-    "Health": "Rural community vulnerability to vector-borne diseases"
+    "Fisheries & Coastal": "Inland fisheries variability",
+    "Health": "Rural community vulnerability to vector-borne diseases",
+    "Infrastructure & Energy": "Hydropower projects at risk from variability",
+    "Tourism": "Eco-tourism at risk from ecosystem decline",
+    "riskScore": 0.65
   },
   "Dharbandora": {
     "lat": 15.283,
@@ -118,6 +149,10 @@
     "Water": "Flash floods in small catchments",
     "Agriculture": "Low resilience of subsistence farming",
     "Forests & Biodiversity": "Forest fragmentation and biodiversity loss",
-    "Health": "Remote communities highly climate vulnerable"
+    "Fisheries & Coastal": "Limited inland fishery productivity",
+    "Health": "Remote communities highly climate vulnerable",
+    "Infrastructure & Energy": "Road connectivity disrupted by heavy rains",
+    "Tourism": "Low resilience of local heritage and eco-sites",
+    "riskScore": 0.55
   }
 }
