@@ -1,105 +1,502 @@
 {
   "North Goa": {
+    "Pernem": {
+      "location": [15.722, 73.795],
+      "risks": {
+        "Coastal": {
+          "level": "High",
+          "description": "Low-lying coastal exposure; beach/shoreline sensitivity and storm-surge/SLR risk.",
+          "evidence": "Coastal talukas face SLR and extreme rainfall-driven flooding; ~15% land <15m elevation highly vulnerable.",
+          "source_tag": "SAPCC Flood/Coast; TOI summary"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Water security stressed by higher ET losses and heavier downpours causing variable recharge.",
+          "evidence": "Projected temp rise increases evapotranspiration; rainfall variability increases.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Rainfall variability and extreme events impact kharif windows; saline ingress risk in coastal belts.",
+          "evidence": "Decrease/stability in mean rainfall with higher extremes; coastal saline intrusion risk noted.",
+          "source_tag": "SAPCC Agriculture/Coast"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat stress days expected to increase; very heavy rainfall events to rise.",
+          "evidence": "40°C days by ~2040 become more common; very heavy/extreme rainfall increases.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Urban_Flooding": {
+          "level": "Medium",
+          "description": "Flash flooding risk in low-lying settlements during very heavy rain spells.",
+          "evidence": "Rising very heavy rainfall frequency; low elevation coastal pockets.",
+          "source_tag": "SAPCC Extremes/Flood"
+        },
+        "Forests_Biodiversity": {
+          "level": "Statewide concern",
+          "description": "Habitat/wetland management needed to buffer heat and floods; ecosystem-based adaptation.",
+          "evidence": "SAPCC calls for urban wetland roles & habitat measures for CC mitigation/adaptation.",
+          "source_tag": "SAPCC Habitat/Wetlands"
+        }
+      }
+    },
     "Bardez": {
-      "Water Resources": ["Groundwater depletion from tourism demand", "Salinity intrusion into wells"],
-      "Agriculture": ["Decline in paddy yields due to erratic rainfall", "Saltwater stress in khazan lands"],
-      "Forests & Biodiversity": ["Mangrove degradation from development", "Habitat fragmentation in estuarine zones"],
-      "Health": ["Increase in vector-borne diseases post-monsoon"],
-      "Coastal & Fisheries": ["Erosion at Calangute and Baga beaches", "Shrinking fish catch due to sea temperature rise"],
-      "Energy": ["Rising electricity demand in tourist hubs"],
-      "Infrastructure & Settlements": ["Urban flooding in Mapusa during heavy rains"]
+      "location": [15.603, 73.767],
+      "risks": {
+        "Coastal": {
+          "level": "High",
+          "description": "High coastal exposure with tourism beaches; erosion and surge risk.",
+          "evidence": "Coastal taluka with popular beaches; low-lying exposure noted.",
+          "source_tag": "SAPCC Coast"
+        },
+        "Urban_Flooding": {
+          "level": "High",
+          "description": "Identified as the most vulnerable to flood-related hazards in state analyses.",
+          "evidence": "SAPCC flood vulnerability map: Bardez most vulnerable to flooding-related hazards.",
+          "source_tag": "SAPCC Flood"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Heavier extremes with interspersed dry spells complicate water security.",
+          "evidence": "Warmer climate ↑ ET; extreme rainfall ↑; water security likely to deteriorate.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Rainfall variability affects paddy & horticulture; flood-damage risk in lowlands.",
+          "evidence": "Increase in very heavy rainfall; flood-prone lowlands.",
+          "source_tag": "SAPCC Agriculture/Flood"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat stress and extreme rain-related health risks increasing.",
+          "evidence": "↑ max temps; ↑ extreme rainfall frequencies.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Forests_Biodiversity": {
+          "level": "Statewide concern",
+          "description": "Green/blue infrastructure and wetland buffers recommended.",
+          "evidence": "SAPCC ecosystem-based adaptation & urban wetland roles.",
+          "source_tag": "SAPCC Habitat/Wetlands"
+        }
+      }
     },
     "Tiswadi": {
-      "Water Resources": ["Pollution in Mandovi affecting drinking supply", "Monsoon runoff overloads drains"],
-      "Agriculture": ["Risk to khazan agriculture from sea-level rise"],
-      "Forests & Biodiversity": ["Mangrove loss near Chorao and Ribandar"],
-      "Health": ["Urban heat island in Panaji increasing heat stress"],
-      "Coastal & Fisheries": ["Erosion at Dona Paula shoreline"],
-      "Energy": ["Growing demand on grid from urbanization"],
-      "Infrastructure & Settlements": ["Flood-prone low-lying wards"]
-    },
-    "Pernem": {
-      "Water Resources": ["Seasonal water scarcity in coastal villages"],
-      "Agriculture": ["Cashew & coconut flowering damaged by unseasonal rains"],
-      "Forests & Biodiversity": ["Loss of dune vegetation and turtle nesting sites"],
-      "Health": ["Heat exposure risk among migrant laborers"],
-      "Coastal & Fisheries": ["Morjim–Mandrem dunes eroding"],
-      "Energy": ["Lack of resilient power during heatwaves"],
-      "Infrastructure & Settlements": ["Poor road drainage leading to flooding"]
+      "location": [15.500, 73.830],
+      "risks": {
+        "Coastal": {
+          "level": "High",
+          "description": "Estuarine/coastal low-lying areas exposed to surge and extreme rainfall flooding.",
+          "evidence": "Coastal taluka; low elevation pockets.",
+          "source_tag": "SAPCC Coast/Flood"
+        },
+        "Urban_Flooding": {
+          "level": "Medium",
+          "description": "Intense short-duration rain spells trigger urban drainage stress.",
+          "evidence": "Very heavy & exceptional rainfall events increase.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Water security pressure under warming and rainfall variability.",
+          "evidence": "↑ ET with warming; rainfall projections variable.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Paddy/vegetable belts sensitive to waterlogging and saline ingress.",
+          "evidence": "Flood and coastal notes.",
+          "source_tag": "SAPCC Agriculture/Coast"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat and extreme-rain event health risks.",
+          "evidence": "↑ 40°C days; ↑ extreme rain.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Forests_Biodiversity": {
+          "level": "Statewide concern",
+          "description": "Wetland/urban lake roles in heat mitigation and carbon sinks.",
+          "evidence": "SAPCC calls out urban wetlands functions.",
+          "source_tag": "SAPCC Habitat/Wetlands"
+        }
+      }
     },
     "Bicholim": {
-      "Water Resources": ["River pollution from mining runoff"],
-      "Agriculture": ["Soil degradation reducing crop yields"],
-      "Forests & Biodiversity": ["Deforestation from mining corridors"],
-      "Health": ["Respiratory ailments from mining dust"],
-      "Coastal & Fisheries": [],
-      "Energy": [],
-      "Infrastructure & Settlements": ["Flash floods from degraded catchments"]
+      "location": [15.592, 73.944],
+      "risks": {
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Rainfall variability and ET losses challenge storage; mining-impacted catchments need restoration (per SAPCC habitat actions).",
+          "evidence": "Water security deterioration likely under warming & extremes; habitat restoration measures proposed.",
+          "source_tag": "SAPCC Water/Habitat"
+        },
+        "Urban_Flooding": {
+          "level": "Medium",
+          "description": "Extreme rainfall events increase pluvial flood potential.",
+          "evidence": "Rising very heavy/excep. rainfall events.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Variability in monsoon affects cropping windows; localized flood damage possible.",
+          "evidence": "Rainfall projections + extremes.",
+          "source_tag": "SAPCC Agriculture"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat stress days increase inland as temps rise.",
+          "evidence": "Projected max temps & 40°C days.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Forests_Biodiversity": {
+          "level": "Statewide concern",
+          "description": "Catchment/green cover and wetland functions emphasized.",
+          "evidence": "Ecosystem-based adaptation & wetlands.",
+          "source_tag": "SAPCC Habitat"
+        },
+        "Coastal": {
+          "level": "Low",
+          "description": "Interior taluka—limited direct SLR exposure; downstream flooding still relevant.",
+          "evidence": "Non-coastal location.",
+          "source_tag": "Topo/SAPCC Flood"
+        }
+      }
     },
     "Sattari": {
-      "Water Resources": ["Flash floods in monsoon, dry season scarcity"],
-      "Agriculture": ["Spice crop losses due to erratic rainfall"],
-      "Forests & Biodiversity": ["Biodiversity threatened from deforestation"],
-      "Health": ["Vector-borne disease outbreaks post-flood"],
-      "Coastal & Fisheries": [],
-      "Energy": [],
-      "Infrastructure & Settlements": ["Landslide risks in hilly zones"]
+      "location": [15.532, 74.126],
+      "risks": {
+        "Forests_Biodiversity": {
+          "level": "Medium",
+          "description": "Western Ghats ecosystems sensitive to warming & rainfall shifts; EBA prioritized.",
+          "evidence": "SAPCC emphasizes habitat conservation and EBA in hilly/ghat areas.",
+          "source_tag": "SAPCC Habitat/EBA"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Headwater catchments face variability; storage & soil-moisture measures required.",
+          "evidence": "Water security under warming + extremes likely to deteriorate.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Rain-fed belts exposed to monsoon variability; extreme rain damages.",
+          "evidence": "Increase in heavy rainfall.",
+          "source_tag": "SAPCC Agriculture/Extremes"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat stress and extreme events increase risks.",
+          "evidence": "↑ temps; ↑ heavy rain.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Urban_Flooding": {
+          "level": "Low",
+          "description": "Lower urbanization; localized flash-flood risks remain.",
+          "evidence": "Taluka profile + extremes.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Coastal": {
+          "level": "Low",
+          "description": "Non-coastal; indirect impacts via basin flooding.",
+          "evidence": "Interior taluka.",
+          "source_tag": "Topo/SAPCC Flood"
+        }
+      }
+    },
+    "Ponda": {
+      "location": [15.408, 74.014],
+      "risks": {
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Central Goa water security stress from warming/ET and rainfall variability.",
+          "evidence": "SAPCC water security deterioration under CC.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Rainfall variability affects cropping; flood pulses possible in low tracts.",
+          "evidence": "↑ extremes; variable mean rainfall.",
+          "source_tag": "SAPCC Agriculture/Extremes"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "More hot days; health burden from heat/extremes.",
+          "evidence": "Max temps trend; 40°C days by ~2040.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Urban_Flooding": {
+          "level": "Medium",
+          "description": "Intense rainfall can overwhelm drains in growing settlements.",
+          "evidence": "Very heavy rainfall increasing.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Forests_Biodiversity": {
+          "level": "Statewide concern",
+          "description": "Green buffer/wetland roles emphasized in SAPCC.",
+          "evidence": "Habitat & wetland actions.",
+          "source_tag": "SAPCC Habitat"
+        },
+        "Coastal": {
+          "level": "Low",
+          "description": "Interior taluka; indirect coastal impacts minimal.",
+          "evidence": "Non-coastal.",
+          "source_tag": "Topo"
+        }
+      }
     }
   },
   "South Goa": {
-    "Salcete": {
-      "Water Resources": ["Saltwater intrusion into aquifers"],
-      "Agriculture": ["Loss of khazan farming productivity"],
-      "Forests & Biodiversity": ["Wetland conversion to real estate"],
-      "Health": ["Water-borne diseases post-flooding"],
-      "Coastal & Fisheries": ["Beach erosion at Colva and Benaulim"],
-      "Energy": [],
-      "Infrastructure & Settlements": ["Poor sewage flooding in Margao"]
-    },
     "Mormugao": {
-      "Water Resources": ["Coastal aquifer salinization"],
-      "Agriculture": [],
-      "Forests & Biodiversity": ["Mangrove degradation near Zuari mouth"],
-      "Health": ["Respiratory issues from coal dust at port"],
-      "Coastal & Fisheries": ["Ship-based pollution affecting marine life"],
-      "Energy": ["Power outages during storm events"],
-      "Infrastructure & Settlements": ["Storm surge threat to port infrastructure"]
+      "location": [15.389, 73.815],
+      "risks": {
+        "Coastal": {
+          "level": "High",
+          "description": "Port/estuarine coastline exposure to surge, SLR and short-duration extreme rainfall.",
+          "evidence": "Coastal exposure & low-lying zones.",
+          "source_tag": "SAPCC Coast/Flood"
+        },
+        "Urban_Flooding": {
+          "level": "Medium",
+          "description": "High imperviousness + cloudbursts elevate pluvial flood risk.",
+          "evidence": "Increase in very heavy & exceptional rain events.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Water security stress from warming and rainfall variability.",
+          "evidence": "↑ ET with warming; variable rainfall.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Localized paddy belts face waterlogging and saline ingress risks.",
+          "evidence": "Coastal + flood dynamics.",
+          "source_tag": "SAPCC Agriculture/Coast"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat stress and flood-related health risks.",
+          "evidence": "↑ temps; ↑ extremes.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Forests_Biodiversity": {
+          "level": "Statewide concern",
+          "description": "Wetland/blue-green buffers recommended.",
+          "evidence": "SAPCC wetland roles.",
+          "source_tag": "SAPCC Habitat"
+        }
+      }
     },
-    "Canacona": {
-      "Water Resources": ["Flash floods in monsoon"],
-      "Agriculture": ["Arecanut & rice crop losses from drought"],
-      "Forests & Biodiversity": ["Mangrove loss affecting turtle nesting"],
-      "Health": ["Post-monsoon malaria incidence"],
-      "Coastal & Fisheries": ["Erosion at Palolem, Agonda beaches"],
-      "Energy": [],
-      "Infrastructure & Settlements": ["Road damage in hilly areas"]
+    "Salcete": {
+      "location": [15.300, 73.957],
+      "risks": {
+        "Coastal": {
+          "level": "High",
+          "description": "Coastal tourism beaches with erosion/SLR/flood exposure.",
+          "evidence": "Coastal taluka + low elevation.",
+          "source_tag": "SAPCC Coast/Flood"
+        },
+        "Urban_Flooding": {
+          "level": "Medium",
+          "description": "Short-duration extreme rainfall overwhelms drains in urbanizing areas.",
+          "evidence": "Rising very heavy & exceptional rains.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Higher ET + variability stresses supply and quality.",
+          "evidence": "Water security deterioration likely.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Paddy belts sensitive to floods/saline ingress; horticulture affected by extremes.",
+          "evidence": "Extreme rainfall and coastal notes.",
+          "source_tag": "SAPCC Agriculture/Coast"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat and extreme rainfall health burdens.",
+          "evidence": "↑ max temps; ↑ extremes.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Forests_Biodiversity": {
+          "level": "Statewide concern",
+          "description": "Blue-green infrastructure emphasis.",
+          "evidence": "SAPCC habitat/wetland measures.",
+          "source_tag": "SAPCC Habitat"
+        }
+      }
     },
     "Quepem": {
-      "Water Resources": ["Pollution in Sal & Kushawati rivers"],
-      "Agriculture": ["Decline in rain-fed farming returns"],
-      "Forests & Biodiversity": ["Deforestation from mining"],
-      "Health": ["Respiratory illnesses near mining zones"],
-      "Coastal & Fisheries": [],
-      "Energy": [],
-      "Infrastructure & Settlements": []
+      "location": [15.228, 74.070],
+      "risks": {
+        "Forests_Biodiversity": {
+          "level": "Medium",
+          "description": "Western Ghats edge; ecosystem-based adaptation and corridor integrity emphasized.",
+          "evidence": "Habitat/EBA actions in SAPCC.",
+          "source_tag": "SAPCC Habitat/EBA"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Monsoon variability with extreme events; storage & soil-moisture practices needed.",
+          "evidence": "Water security likely to deteriorate.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Rain-fed systems sensitive to extremes; local flood pulses.",
+          "evidence": "↑ very heavy rains.",
+          "source_tag": "SAPCC Agriculture/Extremes"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Rising heat stress days inland.",
+          "evidence": "Temperature projections incl. 40°C days.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Urban_Flooding": {
+          "level": "Low",
+          "description": "Less urbanized; localized flash flooding possible.",
+          "evidence": "Extreme rainfall trend.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Coastal": {
+          "level": "Low",
+          "description": "Interior taluka; indirect coastal impacts minimal.",
+          "evidence": "Non-coastal.",
+          "source_tag": "Topo"
+        }
+      }
     },
     "Sanguem": {
-      "Water Resources": ["Hydropower stress in variable flows"],
-      "Agriculture": ["Cashew yield decline under heat stress"],
-      "Forests & Biodiversity": ["Disruption of wildlife corridors"],
-      "Health": ["Heat-related illnesses in mining areas"],
-      "Coastal & Fisheries": [],
-      "Energy": [],
-      "Infrastructure & Settlements": []
+      "location": [15.240, 74.165],
+      "risks": {
+        "Forests_Biodiversity": {
+          "level": "Medium",
+          "description": "Ghats & protected areas—climate-sensitive habitats; EBA priority.",
+          "evidence": "SAPCC habitat/EBA direction.",
+          "source_tag": "SAPCC Habitat/EBA"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Headwater/catchment sensitivity to variability; need for storage & watershed works.",
+          "evidence": "Water security under warming + extremes.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Rain-fed agriculture exposed to extreme rainfall swings.",
+          "evidence": "↑ heavy/extreme rainfall.",
+          "source_tag": "SAPCC Agriculture/Extremes"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat + flood-related health risks.",
+          "evidence": "Temp rise; extremes rise.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Urban_Flooding": {
+          "level": "Low",
+          "description": "Lower urbanization; local flash floods in valleys.",
+          "evidence": "Extreme rainfall increase.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Coastal": {
+          "level": "Low",
+          "description": "No direct coastline.",
+          "evidence": "Interior taluka.",
+          "source_tag": "Topo"
+        }
+      }
     },
     "Dharbandora": {
-      "Water Resources": ["Streams drying during summer"],
-      "Agriculture": ["Sugarcane decline from water scarcity"],
-      "Forests & Biodiversity": ["Mollem forest fragmentation"],
-      "Health": ["Heat stress affecting forest-dependent communities"],
-      "Coastal & Fisheries": [],
-      "Energy": [],
-      "Infrastructure & Settlements": []
+      "location": [15.322, 74.183],
+      "risks": {
+        "Forests_Biodiversity": {
+          "level": "Medium",
+          "description": "Western Ghats interface; ecosystem restoration and corridor continuity prioritized.",
+          "evidence": "SAPCC habitat/EBA.",
+          "source_tag": "SAPCC Habitat/EBA"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Catchment/ET/rainfall variability challenges.",
+          "evidence": "Water security deterioration likely.",
+          "source_tag": "SAPCC Water"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Rainfall extremes disrupt rain-fed cycles.",
+          "evidence": "Rising very heavy rainfall events.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat stress and extreme-event health burden increasing.",
+          "evidence": "↑ temps; 40°C days expected.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Urban_Flooding": {
+          "level": "Low",
+          "description": "Localized flash flooding in valleys/streams during cloudbursts.",
+          "evidence": "Extreme rainfall trend.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Coastal": {
+          "level": "Low",
+          "description": "No direct SLR exposure.",
+          "evidence": "Interior taluka.",
+          "source_tag": "Topo"
+        }
+      }
+    },
+    "Quepem": {
+      "location": [15.230, 74.070],
+      "risks": {} 
+    },
+    "Canacona": {
+      "location": [15.018, 74.023],
+      "risks": {
+        "Coastal": {
+          "level": "High",
+          "description": "Coastal tourism hubs with beach erosion, surge and SLR exposure; village-level studies show high climate vulnerability.",
+          "evidence": "Coastal exposure; recent assessments of high vulnerability in coastal villages.",
+          "source_tag": "SAPCC Coast; recent studies"
+        },
+        "Urban_Flooding": {
+          "level": "Medium",
+          "description": "Localized flash/pluvial floods during intense monsoon spells.",
+          "evidence": "Increase in very heavy/extreme rainfall events.",
+          "source_tag": "SAPCC Extremes"
+        },
+        "Water": {
+          "level": "Statewide concern",
+          "description": "Warming + variability stress freshwater and wells; saline ingress risk along coast.",
+          "evidence": "Water security likely to deteriorate; coastal saline risk.",
+          "source_tag": "SAPCC Water/Coast"
+        },
+        "Agriculture": {
+          "level": "Statewide concern",
+          "description": "Rainfall swings affect paddy & horticulture; flood/saline pulses near coast.",
+          "evidence": "Extremes + coastal notes.",
+          "source_tag": "SAPCC Agriculture/Coast"
+        },
+        "Health": {
+          "level": "Medium",
+          "description": "Heat stress and extreme-rain health impacts.",
+          "evidence": "↑ temps; ↑ extremes.",
+          "source_tag": "SAPCC Extremes/Health"
+        },
+        "Forests_Biodiversity": {
+          "level": "Statewide concern",
+          "description": "Ecosystem-based adaptation and dune/wetland buffers emphasized.",
+          "evidence": "SAPCC habitat/wetlands.",
+          "source_tag": "SAPCC Habitat/Wetlands"
+        }
+      }
     }
   }
 }
